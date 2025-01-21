@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    if: github.repository == 'cryptbuilder/crypto-diary-frontend'  
     runs-on: ubuntu-latest
 
     steps:
@@ -25,6 +26,7 @@ jobs:
       run: npm run build
 
   deploy:
+    if: github.repository == 'cryptbuilder/crypto-diary-frontend'
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop' # Trigger deployment only if code is on the develop branch
