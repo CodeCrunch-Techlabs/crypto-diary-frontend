@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
             {/* Hero Text */}
             <div className="text-center space-y-6 max-w-3xl">
                 <h1 className="text-4xl md:text-3xl font-mono text-gray-900 dark:text-green-400 leading-tight">
-                    A hub to track crypto fans, builders, and investors' contributions.
+                    A hub to track crypto fans, builders, and investors&apos;s contributions.
                 </h1>
             </div>
 

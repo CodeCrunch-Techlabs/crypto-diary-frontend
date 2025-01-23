@@ -6,7 +6,9 @@ import Pagination from "@/app/components/Product/Pagination";
 
 const ProductsTable: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
+  
   const itemsPerPage = 10;
 
   // Filtered and paginated products
