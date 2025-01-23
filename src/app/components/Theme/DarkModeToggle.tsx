@@ -7,11 +7,11 @@ const ThemeToggle: React.FC = () => {
   const [isDark, setIsDark] = useState(true); // Default to dark mode
 
   useEffect(() => {
+    // Check localStorage or user preference for the theme
     const theme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    // Default to dark mode unless the user has selected light mode explicitly
-    if (theme === "light" || (!theme && !prefersDark)) {
+    if (theme === "light") {
       setIsDark(false);
       document.documentElement.classList.remove("dark");
     } else {
