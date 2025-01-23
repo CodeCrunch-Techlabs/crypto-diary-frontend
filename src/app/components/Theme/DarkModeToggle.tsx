@@ -10,7 +10,7 @@ const ThemeToggle: React.FC = () => {
     // Check localStorage or user preference for the theme
     const theme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
+    console.log(prefersDark)
     if (theme === "light") {
       setIsDark(false);
       document.documentElement.classList.remove("dark");
