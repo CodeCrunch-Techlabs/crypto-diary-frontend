@@ -2,24 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Root variables for light and dark mode colors */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --border-default: rgba(115, 115, 115, 0.5); /* Light mode default border */
+  --border-hover: rgba(115, 115, 115, 1); /* Light mode hover border */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #000000;
+  --foreground: #4ade80;
+  --border-default: rgba(74, 222, 128, 0.3); /* Dark mode default border */
+  --border-hover: rgba(74, 222, 128, 1); /* Dark mode hover border */
 }
 
+/* General body styles */
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  font-family: 'Arial', sans-serif;
-  background-color: #f9fafb;
-  margin: 0;
-  padding: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Light mode styles */
+html {
+  @apply bg-white text-gray-900;
+}
+
+/* Dark mode styles */
+html.dark {
+  @apply bg-black text-green-400;
+}
+
+/* Border visibility */
+.border {
+  border-width: 1px;
+  border-color: var(--border-default);
+  transition: border-color 0.3s ease;
+}
+
+.border:hover {
+  border-color: var(--border-hover);
+}
+
+/* Utility classes for buttons and general hover effects */
+button {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+button:hover {
+  background-color: rgba(115, 115, 115, 0.1); /* Light mode button hover */
+}
+
+.dark button:hover {
+  background-color: rgba(74, 222, 128, 0.1); /* Dark mode button hover */
 }
