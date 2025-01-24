@@ -1,13 +1,13 @@
  
 import React from 'react';
-import { Twitter, Linkedin, Github, Mail } from 'lucide-react';
+import { Twitter, Linkedin, Github, Mail, Send } from 'lucide-react';
 
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
     const socialLinks = [
         { icon: Twitter, url: '#', label: 'Twitter' },
         { icon: Linkedin, url: '#', label: 'LinkedIn' },
-        { icon: Github, url: '#', label: 'GitHub' },
+        { icon: Send, url: '#', label: 'Telegram' },
         { icon: Mail, url: '#', label: 'Email' },
     ];
 
