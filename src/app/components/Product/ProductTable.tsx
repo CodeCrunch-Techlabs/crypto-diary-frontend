@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import { products } from "@/app/Const/products";
 import Pagination from "@/app/components/Product/Pagination";
 
 const ProductsTable: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  // const [searchTerm, setSearchTerm] = useState("");
   const [searchTerm] = useState("");
-  
+
   const itemsPerPage = 10;
 
   // Filtered and paginated products
@@ -61,10 +61,12 @@ const ProductsTable: React.FC = () => {
         {/* Table Rows or No Results */}
         {currentProducts.length > 0 ? (
           currentProducts.map((product, index) => (
-            <div
+            <Link
               key={index}
+              href={`/productDetail`} // Assuming `product.id` exists
               className="grid grid-cols-[1.5fr_3fr_1fr_1fr] px-6 py-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5"
             >
+              {/* Logo and Name */}
               <div className="flex items-center space-x-4">
                 <img
                   src={product.logo}
@@ -73,12 +75,18 @@ const ProductsTable: React.FC = () => {
                 />
                 <span className="font-medium">{product.name}</span>
               </div>
+
+              {/* Description */}
               <span className="w-[92%] truncate text-ellipsis overflow-hidden whitespace-nowrap">
                 {product.description}
               </span>
+
+              {/* Category */}
               <span>{product.category}</span>
+
+              {/* Blockchain */}
               <span>{product.blockchain}</span>
-            </div>
+            </Link>
           ))
         ) : (
           <div className="text-center py-6 text-gray-500 dark:text-green-300">
