@@ -1,6 +1,6 @@
  
 import React from 'react';
-import { Twitter, Linkedin, Github, Mail, Send } from 'lucide-react';
+import { Twitter, Linkedin, Mail, Send } from 'lucide-react';
 
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
