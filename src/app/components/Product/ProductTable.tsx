@@ -138,10 +138,10 @@ interface ProductsTableProps {
 
 const ProductsTable: React.FC<ProductsTableProps> = ({ productsData }) => {
   const { products, currentPage, totalPages } = productsData;
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const category = searchParams.get("category") || "";
-  const search = searchParams.get("search") || "";
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const category = searchParams.get("category") || "";
+  // const search = searchParams.get("search") || "";
 
   return (
     <section className="px-6 py-12">
