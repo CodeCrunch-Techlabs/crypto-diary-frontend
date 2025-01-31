@@ -114,7 +114,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { useRouter, useSearchParams } from "next/navigation";
 import Pagination from "./Pagination";
 
 interface Product {
@@ -186,7 +186,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ productsData }) => {
                 {product.tagline}
               </span>
 
-              <span className="truncate overflow-hidden whitespace-nowrap">{product.categories.map((category: any) => category).join(', ')}</span>
+              <span className="truncate overflow-hidden whitespace-nowrap">{product.categories.map((category: string) => category).join(', ')}</span>
             </Link>
           ))
         ) : (
