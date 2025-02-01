@@ -1,12 +1,13 @@
+import Link from "next/link";
 import ThemeToggle from "../Theme/DarkModeToggle";
 
 const Navbar: React.FC = () => {
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-white dark:bg-black border-b border-gray-300 dark:border-green-400">
       {/* App Name */}
-      <h1 className="text-xl font-mono text-gray-900 dark:text-green-400">
+      <Link href="/" className="text-xl font-mono text-gray-900 dark:text-green-400 cursor-pointer hover:opacity-80 transition">
         CryptoDiary
-      </h1>
+      </Link>
 
       {/* Right Side Buttons */}
       <div className="flex items-center space-x-4">

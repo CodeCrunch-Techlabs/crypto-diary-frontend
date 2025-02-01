@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic"; // Ensures fresh data on each request
-import Hero from "./components/Hero/HeroSection"
-import ProductsTable from "@/app/components/Product/ProductTable";
+import Hero from "../components/Hero/HeroSection"
+import ProductsTable from "@/components/Product/ProductTable";
 
 async function fetchProducts({ search, category, page }: { search?: string; category?: string; page?: number }) {
   const queryParams = new URLSearchParams();
@@ -19,7 +19,11 @@ async function fetchProducts({ search, category, page }: { search?: string; cate
 
 export default async function Home({ searchParams }: { searchParams: { search?: string; category?: string; page?: string } }) {
   const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
-  const productsData = await fetchProducts({ search: searchParams.search, category: searchParams.category, page });
+  const search = searchParams.search || "";
+  const category = searchParams.category || "";
+
+  const productsData = await fetchProducts({ search, category, page });
+
   return (
     <main className="max-w-7xl mx-auto">
       <Hero />

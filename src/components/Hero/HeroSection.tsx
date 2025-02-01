@@ -1,28 +1,20 @@
 "use client"
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-
+import { useSearch } from "@/context/SearchProvider";
 
 const Hero: React.FC = () => {
 
-    const router = useRouter();
-    const searchParams = useSearchParams();
+    const { search, setSearch, loading } = useSearch(); // ✅ Use context for state
+    const [input, setInput] = useState(search); // UI state for input
+  
+    // Handle search action
+    const handleSearch = () => {
+      if (input.trim() !== "") {
+        setSearch(input);
+      }
+    };
 
-      // Get existing search term from URL (if any)
-  const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [loading, setLoading] = useState(false);
-
-  const handleSearch = () => {
-    if (!search.trim()) return; // Prevent empty searches
-    setLoading(true);
-    const params = new URLSearchParams();
-    params.set("search", search);
-
-    router.push(`/?${params.toString()}`); // Update URL while staying on homepage
-    setTimeout(() => setLoading(false), 500); // Auto-reset loading after some time
-
-  };
     const filterButtons = [
         { label: "All", emoji: "🟢" },
         { label: "Products", emoji: "📦" },
@@ -56,8 +48,8 @@ const Hero: React.FC = () => {
                         type="text"
                         placeholder="Ask AI which Web3 products you want to explore!"
                         className="w-full px-4 py-3 bg-white dark:bg-black border border-gray-300 dark:border-green-400/30 rounded-lg focus:outline-none focus:border-gray-400 dark:focus:border-green-400 pr-24 text-gray-900 dark:text-green-400"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
                         onKeyDown={(e) => e.key === "Enter" && handleSearch()} // Search on Enter key
                     />
 
@@ -72,7 +64,7 @@ const Hero: React.FC = () => {
                             className="p-1 text-gray-900 dark:text-green-400 hover:bg-gray-100 dark:hover:bg-green-400/10 rounded">
                                 {loading ? (
               // Spinner while loading
-              <div className="w-5 h-5 border-2 border-gray-400 dark:border-green-400 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-5 h-5 border-2 border-transparent border-t-green-400 border-r-green-400 rounded-full animate-spin"></div>
             ) : (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

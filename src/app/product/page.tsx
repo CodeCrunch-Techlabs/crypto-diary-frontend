@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic"; // Ensures fresh data on each request
 
-import ProductsTable from "@/app/components/Product/ProductTable";
-import Hero from "../components/Hero/HeroSection";
+import ProductsTable from "@/components/Product/ProductTable";
+import Hero from "../../components/Hero/HeroSection";
 
 export default async function ProductPage({ searchParams }: { searchParams: { search?: string; category?: string; page?: string } }) {
     const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
@@ -11,7 +11,7 @@ export default async function ProductPage({ searchParams }: { searchParams: { se
   
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products?page=${page}&limit=${limit}&category=${category}&search=${search}`,
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/products?page=${page}&limit=${limit}&category=${category}&search=${search}`,
         { cache: "no-store" } // Ensures fresh data for SSR
       );
   

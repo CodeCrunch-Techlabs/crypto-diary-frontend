@@ -1,30 +1,42 @@
+'use client'
 import React from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const ProductDetailPage: React.FC = () => {
-  const product = {
-    name: "Uniswap",
-    tagline: "Decentralized trading protocol.",
-    description:
-      "Uniswap is a decentralized trading protocol that allows users to swap cryptocurrencies directly from their wallets without any middleman. Uniswap is a decentralized trading protocol that allows users to swap cryptocurrencies directly from their wallets without any middleman.",
-    category: "DeFi",
-    link: "https://uniswap.org",
-    logo: "https://ph-files.imgix.net/3090d95b-e49a-497d-8a1c-38a2da573396.png",
-    images: [
-      "https://ph-files.imgix.net/23d8f967-c59a-4fd4-9c08-419cae5106c7.png?auto=compress&codec=mozjpeg&cs=strip&auto=format&w=312&h=220&fit=max&frame=1&dpr=2",
-      "https://ph-files.imgix.net/d01f5fc2-46c7-42e9-85fa-faec603c77a2.png?auto=compress&codec=mozjpeg&cs=strip&auto=format&w=306&h=220&fit=max&frame=1&dpr=2",
-      "https://ph-files.imgix.net/4ec9c72d-256a-43d8-9ac1-de8a63fe7364.png?auto=compress&codec=mozjpeg&cs=strip&auto=format&w=308&h=220&fit=max&frame=1&dpr=2",
-    ],
-  };
+interface Product {
+  name: string;
+  tagline: string;
+  description: string;
+  categories: string[];
+  product_url: string;
+  logo_url: string;
+  media_urls: string[];
+}
+
+interface ProductDetailProps {
+  product: Product;
+}
+
+const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
+  const router = useRouter();
+
+  if (!product) {
+    return (
+      <section className="px-6 py-12 text-center">
+        <p className="text-red-500">Product not found.</p>
+      </section>
+    );
+  }
 
   return (
     <section className="px-6 py-12 max-w-7xl mx-auto">
       {/* Back to Products Button */}
       <div className="mb-6">
-        <Link href="/"
-           className="inline-block px-4 py-2 text-sm font-semibold text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors">
-            &larr; Back to Products
-        </Link>
+        <button
+          onClick={() => router.back()} // ✅ Navigate to the previous page
+          className="inline-block px-4 py-2 text-sm font-semibold text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors"
+        >
+          &larr; Back to Products
+        </button>
       </div>
 
       {/* Hero Section */}
@@ -32,7 +44,7 @@ const ProductDetailPage: React.FC = () => {
         {/* Logo Section */}
         <div className="p-6 flex justify-center items-center bg-gray-50 dark:bg-green-900/10">
           <img
-            src={product.logo}
+            src={product.logo_url}
             alt={`${product.name} logo`}
             className="w-32 h-32 object-contain border border-gray-300 dark:border-green-900/30 rounded-lg"
           />
@@ -57,14 +69,19 @@ const ProductDetailPage: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap gap-2 items-center">
-            <span className="px-3 py-1 text-sm border border-gray-300 rounded-lg bg-gray-100 dark:bg-green-900/10 text-gray-700 dark:text-green-300">
-              {product.category}
-            </span>
+            {product.categories.map((category: string, index: number) => (
+              <span
+                key={index}
+                className="px-3 py-1 text-sm border border-gray-300 rounded-lg bg-gray-100 dark:bg-green-900/10 text-gray-700 dark:text-green-300"
+              >
+                {category}
+              </span>
+            ))}
           </div>
 
           <div>
             <a
-              href={product.link}
+              href={product.product_url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-6 py-3 text-sm font-semibold text-white bg-green-500 dark:bg-green-400 hover:bg-green-600 dark:hover:bg-green-500 rounded-md shadow transition-colors"
@@ -81,7 +98,7 @@ const ProductDetailPage: React.FC = () => {
           Product Images
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-          {product.images.map((image, index) => (
+          {product.media_urls.map((image, index) => (
             <div
               key={index}
               className="border border-gray-200 dark:border-green-900/30 rounded-lg overflow-hidden shadow-lg"
