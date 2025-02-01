@@ -114,7 +114,9 @@
 
 import React from "react";
 import Link from "next/link";
-// import { useRouter, useSearchParams } from "next/navigation";
+import { 
+  // useRouter,
+   useSearchParams } from "next/navigation";
 import Pagination from "./Pagination";
 
 interface Product {
@@ -138,10 +140,11 @@ interface ProductsTableProps {
 
 const ProductsTable: React.FC<ProductsTableProps> = ({ productsData }) => {
   const { products, currentPage, totalPages } = productsData;
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("search") || "";
+
   // const router = useRouter();
-  // const searchParams = useSearchParams();
   // const category = searchParams.get("category") || "";
-  // const search = searchParams.get("search") || "";
 
   return (
     <section className="px-6 py-12">
@@ -149,7 +152,9 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ productsData }) => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
         <h2 className="text-2xl font-mono text-gray-900 dark:text-green-400">
-          Products
+          {/* Products */}
+          {searchQuery ? `Results for "${searchQuery}"` : "All Products"}
+
         </h2>
         <div className="flex items-center space-x-4">
           <button className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors">
