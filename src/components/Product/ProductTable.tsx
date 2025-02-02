@@ -5,16 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Pagination from "./Pagination";
 import { generateSlug } from "@/utils/generateSlug";
-
-interface Product {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  categories: string[];
-  blockchain: string;
-  logo_url: string;
-}
+import { Product } from "@/utils/interface";
 
 interface ProductsTableProps {
   productsData: {
