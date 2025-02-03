@@ -1,6 +1,5 @@
-'use client'
 import React from "react";
-import { useRouter } from "next/navigation";
+import BackButton from "../Button/BackButton";
 
 interface Product {
   name: string;
@@ -17,7 +16,6 @@ interface ProductDetailProps {
 }
 
 const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
-  const router = useRouter();
 
   if (!product) {
     return (
@@ -31,12 +29,7 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
     <section className="px-6 py-12 max-w-7xl mx-auto">
       {/* Back to Products Button */}
       <div className="mb-6">
-        <button
-          onClick={() => router.back()} // ✅ Navigate to the previous page
-          className="inline-block px-4 py-2 text-sm font-semibold text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors"
-        >
-          &larr; Back to Products
-        </button>
+        <BackButton />
       </div>
 
       {/* Hero Section */}

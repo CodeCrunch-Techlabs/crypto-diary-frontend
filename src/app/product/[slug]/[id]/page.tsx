@@ -17,14 +17,13 @@ async function fetchProduct(id: string) {
 }
 
 export default async function ProductDetail({ params }: ProductDetailProps) {
-  const { id, slug } = params;
+  const { id } = params;
 
   const product = await fetchProduct(id);
 
   if (!product) {
-    return notFound(); // ✅ Show 404 page if product not found
+    return notFound();  
   }
-  console.log('here is the product details', product);
 
   return <ProductDetailPage product={product} />;
 }

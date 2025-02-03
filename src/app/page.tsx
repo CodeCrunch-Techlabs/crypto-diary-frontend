@@ -23,12 +23,11 @@ export default async function Home({ searchParams }: { searchParams: { search?: 
   const category = searchParams.category || "";
 
   const productsData = await fetchProducts({ search, category, page });
-  console.log('productsData', productsData);
+
   return (
     <main className="max-w-7xl mx-auto">
       <Hero />
-
-      <ProductsTable productsData={productsData} />
+      <ProductsTable productsData={productsData} searchParams={searchParams} />
     </main>
   )
 }

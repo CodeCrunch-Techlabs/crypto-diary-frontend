@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import Pagination from "./Pagination";
 import { generateSlug } from "@/utils/generateSlug";
 import { Product } from "@/utils/interface";
+import ScrollToTop from "@/utils/ScrollToTop";
 
 interface ProductsTableProps {
   productsData: {
@@ -14,15 +12,17 @@ interface ProductsTableProps {
     totalPages: number;
     products: Product[];
   };
+  searchParams: { search?: string; page?: string }; 
 }
 
-const ProductsTable: React.FC<ProductsTableProps> = ({ productsData }) => {
+const ProductsTable: React.FC<ProductsTableProps> = ({ productsData, searchParams }) => {
   const { products, currentPage, totalPages } = productsData;
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("search") || "";
+  const searchQuery = searchParams.search || ""; 
 
   return (
     <section className="px-6 py-12">
+
+      <ScrollToTop trigger={`${searchQuery}-${currentPage}`} />
 
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">

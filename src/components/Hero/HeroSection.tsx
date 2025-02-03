@@ -1,18 +1,33 @@
 "use client"
 
-import { useState } from "react";
-import { useSearch } from "@/context/SearchProvider";
+import { useEffect, useState } from "react";
+import { useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Hero: React.FC = () => {
+ 
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    
+    const initialSearch = searchParams.get("search") || ""; // Read search from URL
+    const [input, setInput] = useState(initialSearch);
+    const [isPending, startTransition] = useTransition();
 
-    const { search, setSearch, loading } = useSearch(); // ✅ Use context for state
-    const [input, setInput] = useState(search); // UI state for input
-  
-    // Handle search action
+    // ✅ Sync input field with URL on page load or navigation
+    useEffect(() => {
+        setInput(initialSearch);
+    }, [initialSearch]);
+
     const handleSearch = () => {
-      if (input.trim() !== "") {
-        setSearch(input);
-      }
+        if (input.trim() === "") return;
+
+        // Update URL search params
+        const params = new URLSearchParams(searchParams);
+        params.set("search", input);
+        params.delete("page"); // Reset pagination on new search
+        startTransition(() => {
+            router.push(`/?${params.toString()}`);
+        });
     };
 
     const filterButtons = [
@@ -62,7 +77,7 @@ const Hero: React.FC = () => {
                         <button
                             onClick={handleSearch}
                             className="p-1 text-gray-900 dark:text-green-400 hover:bg-gray-100 dark:hover:bg-green-400/10 rounded">
-                                {loading ? (
+                                {isPending ? (
               // Spinner while loading
             <div className="w-5 h-5 border-2 border-transparent border-t-green-400 border-r-green-400 rounded-full animate-spin"></div>
             ) : (
