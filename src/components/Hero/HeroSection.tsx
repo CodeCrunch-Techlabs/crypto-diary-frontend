@@ -5,7 +5,6 @@ import { useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
-    console.log('here is totalProducts in Hero ------',totalProducts);
  
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -18,18 +17,6 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
     useEffect(() => {
         setInput(initialSearch);
     }, [initialSearch]);
-
-    // const handleSearch = () => {
-    //     if (input.trim() === "") return;
-
-    //     // Update URL search params
-    //     const params = new URLSearchParams(searchParams);
-    //     params.set("search", input);
-    //     params.delete("page"); // Reset pagination on new search
-    //     startTransition(() => {
-    //         router.push(`/?${params.toString()}`);
-    //     });
-    // };
 
     const handleSearch = () => {
         if (input.trim() === "") return; // Prevent empty searches
@@ -47,7 +34,6 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
         params.delete("page"); 
     
         startTransition(() => {
-            console.log("🔹 Searching for:", input);
             router.push(`/?${params.toString()}`);
         });
     };

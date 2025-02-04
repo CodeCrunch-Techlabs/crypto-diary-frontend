@@ -15,19 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
   const category = searchParams.get("category") || "";
   const search = searchParams.get("search") || "";
 
-  console.log('currentPage in Pagination ----------', currentPage);
   const pageNumber = Number(currentPage);
-  console.log('pageNumber in Pagination ----------', pageNumber);
-  // const changePage = (page: number) => {
-  //   const params = new URLSearchParams();
-  //   if (search) params.append("search", search);
-  //   if (category) params.append("category", category);
-  //   params.append("page", page.toString());
-
-  //   console.log('params ----------', params.toString());
-
-  //   router.push(`/?${params.toString()}`); // ✅ Stay on `/` but update URL
-  // };
 
   const changePage = (page: number) => {
     const params = new URLSearchParams();

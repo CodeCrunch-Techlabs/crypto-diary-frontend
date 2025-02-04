@@ -24,7 +24,6 @@ export async function fetchProducts({ search, category, page }: { search?: strin
  * Fetch total number of products (cached for performance)
  */
 export const fetchTotalProducts = cache(async () => {
-  console.log("🔥 Fetching total products from API..."); // Log API call
 
   try {
     const res = await fetch(`${BASE_URL}/api/products/stats`, {
@@ -34,7 +33,6 @@ export const fetchTotalProducts = cache(async () => {
     if (!res.ok) throw new Error("Failed to fetch total product count");
 
     const data = await res.json();
-    console.log("✅ Total products fetched:", data.totalProducts);
     return data.totalProducts;
   } catch (error) {
     console.error("❌ Error fetching total products:", error);
