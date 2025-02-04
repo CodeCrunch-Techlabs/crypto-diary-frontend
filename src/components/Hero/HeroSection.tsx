@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const Hero: React.FC = () => {
+const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
+    console.log('here is totalProducts in Hero ------',totalProducts);
  
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -18,14 +19,35 @@ const Hero: React.FC = () => {
         setInput(initialSearch);
     }, [initialSearch]);
 
-    const handleSearch = () => {
-        if (input.trim() === "") return;
+    // const handleSearch = () => {
+    //     if (input.trim() === "") return;
 
-        // Update URL search params
+    //     // Update URL search params
+    //     const params = new URLSearchParams(searchParams);
+    //     params.set("search", input);
+    //     params.delete("page"); // Reset pagination on new search
+    //     startTransition(() => {
+    //         router.push(`/?${params.toString()}`);
+    //     });
+    // };
+
+    const handleSearch = () => {
+        if (input.trim() === "") return; // Prevent empty searches
+    
+        // Get the current search value from the URL
+        const currentSearchQuery = searchParams.get("search") || "";
+    
+        // ✅ Prevent searching if input is the same as the existing query
+        if (input.trim().toLowerCase() === currentSearchQuery.trim().toLowerCase()) {
+            return;
+        }
+    
         const params = new URLSearchParams(searchParams);
         params.set("search", input);
-        params.delete("page"); // Reset pagination on new search
+        params.delete("page"); 
+    
         startTransition(() => {
+            console.log("🔹 Searching for:", input);
             router.push(`/?${params.toString()}`);
         });
     };
@@ -41,7 +63,7 @@ const Hero: React.FC = () => {
     ];
 
     const stats = [
-        { label: "Total Producs", value: "24321" },
+        { label: "Total Products", value: totalProducts.toString() },
         { label: "Upcoming Events", value: "435" },
         { label: "Investors", value: "474" },
         { label: "Incubators", value: "123" },

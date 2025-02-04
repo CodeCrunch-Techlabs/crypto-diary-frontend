@@ -15,13 +15,28 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
   const category = searchParams.get("category") || "";
   const search = searchParams.get("search") || "";
 
+  console.log('currentPage in Pagination ----------', currentPage);
+  const pageNumber = Number(currentPage);
+  console.log('pageNumber in Pagination ----------', pageNumber);
+  // const changePage = (page: number) => {
+  //   const params = new URLSearchParams();
+  //   if (search) params.append("search", search);
+  //   if (category) params.append("category", category);
+  //   params.append("page", page.toString());
+
+  //   console.log('params ----------', params.toString());
+
+  //   router.push(`/?${params.toString()}`); // ✅ Stay on `/` but update URL
+  // };
+
   const changePage = (page: number) => {
     const params = new URLSearchParams();
     if (search) params.append("search", search);
     if (category) params.append("category", category);
-    params.append("page", page.toString());
+    
+    params.set("page", String(page)); // ✅ Ensure page is always a string
 
-    router.push(`/?${params.toString()}`); // ✅ Stay on `/` but update URL
+    router.push(`/?${params.toString()}`);
   };
 
   return (
@@ -30,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
         <ChevronsLeft className="w-5 h-5" />
       </button>
 
-      <button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
+      <button onClick={() => changePage(pageNumber - 1)} disabled={currentPage === 1} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
         <ChevronLeft className="w-5 h-5" />
       </button>
 
@@ -38,7 +53,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
         Page {currentPage} of {totalPages}
       </span>
 
-      <button onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
+      <button onClick={() => changePage(pageNumber + 1)} disabled={currentPage === totalPages} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
         <ChevronRight className="w-5 h-5" />
       </button>
 
