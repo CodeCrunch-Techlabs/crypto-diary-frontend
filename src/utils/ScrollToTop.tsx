@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 
 interface ScrollToTopProps {
-  trigger: any; // Value that triggers scroll effect (page or search change)
+  trigger: unknown; // Value that triggers scroll effect (page or search change)
 }
 
 const ScrollToTop: React.FC<ScrollToTopProps> = ({ trigger }) => {

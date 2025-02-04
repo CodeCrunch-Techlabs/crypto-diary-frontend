@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5003/api";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const res = await fetch(`${BACKEND_URL}/products/stats`, {
       cache: "no-store",
