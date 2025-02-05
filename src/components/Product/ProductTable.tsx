@@ -54,7 +54,6 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ productsData, searchParam
             <Link
               key={product.id}
               href={`/product/${slug}/${product.id}`} // ✅ SEO-friendly URL
-              // href={`/product/${product.id}`}
               className="grid grid-cols-[1.5fr_3.5fr_1.5fr] px-6 py-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5"
             >
               <div className="flex items-center space-x-4">
