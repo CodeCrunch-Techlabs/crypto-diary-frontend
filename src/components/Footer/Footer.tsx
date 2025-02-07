@@ -5,8 +5,8 @@ import { Twitter, Linkedin, Mail, Send } from 'lucide-react';
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
     const socialLinks = [
-        { icon: Twitter, url: '#', label: 'Twitter' },
-        { icon: Linkedin, url: '#', label: 'LinkedIn' },
+        { icon: Twitter, url: 'https://x.com/cryptodiaryfun', label: 'Twitter' },
+        { icon: Linkedin, url: 'https://www.linkedin.com/company/cryptodiaryfun/about/?viewAsMember=true', label: 'LinkedIn' },
         { icon: Send, url: '#', label: 'Telegram' },
         { icon: Mail, url: '#', label: 'Email' },
     ];
@@ -22,6 +22,7 @@ const Footer: React.FC = () => {
                         <a
                             key={index}
                             href={social.url}
+                            target="_blank"
                             className="text-gray-500 dark:text-green-400 hover:text-gray-900 dark:hover:text-green-300 transition-colors"
                             aria-label={social.label}
                         >
