@@ -1,5 +1,6 @@
 import React from "react";
 import BackButton from "../Button/BackButton";
+import Image from "next/image";
 
 interface Product {
   name: string;
@@ -36,7 +37,9 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
       <div className="flex flex-col md:flex-row bg-white dark:bg-black border border-gray-200 shadow-lg rounded-lg overflow-hidden">
         {/* Logo Section */}
         <div className="p-6 flex justify-center items-center bg-gray-50 dark:bg-green-900/10">
-          <img
+          <Image
+            width={128}
+            height={128}
             src={product.logo_url}
             alt={`${product.name} logo`}
             className="w-32 h-32 object-contain border border-gray-300 dark:border-green-900/30 rounded-lg"
@@ -96,9 +99,11 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
               key={index}
               className="border border-gray-200 dark:border-green-900/30 rounded-lg overflow-hidden shadow-lg"
             >
-              <img
+              <Image
                 src={image}
                 alt={`Product image ${index + 1}`}
+                width={300}
+                height={300}
                 className="w-full h-64 object-cover"
               />
             </div>

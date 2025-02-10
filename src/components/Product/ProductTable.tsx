@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 import { generateSlug } from "@/utils/generateSlug";
 import { Product } from "@/utils/interface";
 import ScrollToTop from "@/utils/ScrollToTop";
+import Image from "next/image";
 
 interface ProductsTableProps {
   productsData: {
@@ -12,12 +13,13 @@ interface ProductsTableProps {
     totalPages: number;
     products: Product[];
   };
-  searchParams: { search?: string; page?: string }; 
+  searchParams: Promise<{ search?: string; page?: number }>; 
 }
 
-const ProductsTable: React.FC<ProductsTableProps> = ({ productsData, searchParams }) => {
+const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searchParams }) => {
   const { products, currentPage, totalPages } = productsData;
-  const searchQuery = searchParams.search || ""; 
+  const {search} = await searchParams;
+  const searchQuery = search || ""; 
 
   return (
     <section className="px-6 py-12">
@@ -57,9 +59,11 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ productsData, searchParam
               className="grid grid-cols-[1.5fr_3.5fr_1.5fr] px-6 py-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5"
             >
               <div className="flex items-center space-x-4">
-                <img
+                <Image
                   src={product.logo_url}
                   alt={`${product.name} logo`}
+                  width={32}
+                  height={32}
                   className="w-8 h-8 object-contain"
                 />
                 <span className="font-medium">{product.name}</span>
