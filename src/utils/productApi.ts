@@ -11,7 +11,8 @@ export async function fetchProducts({ search, category, page }: { search?: strin
   if (category) queryParams.append("category", category);
   if (page) queryParams.append("page", String(page));
 
-  const res = await fetch(`${BASE_URL}/api/products?${queryParams.toString()}`, {
+  // const res = await fetch(`${BASE_URL}/api/products?${queryParams.toString()}`, {
+    const res = await fetch(`http://localhost:5003/api/products?${queryParams.toString()}`, {
     cache: "no-store",
   });
 
