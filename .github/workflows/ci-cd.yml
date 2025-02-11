@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    if: github.repository == 'cryptbuilder/crypto-diary-frontend'  
+    if: github.repository == 'cryptbuilder/forked-crypto-diary-frontend'  
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +26,7 @@ jobs:
         run: npm run build
 
   deploy:
-    if: github.repository == 'cryptbuilder/crypto-diary-frontend' && github.ref == 'refs/heads/develop' # Combine conditions here
+    if: github.repository == 'cryptbuilder/forked-crypto-diary-frontend' && github.ref == 'refs/heads/develop' # Combine conditions here
     needs: build
     runs-on: ubuntu-latest
 
