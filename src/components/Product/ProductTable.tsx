@@ -60,6 +60,7 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
             >
               <div className="flex items-center space-x-4">
                 <Image
+                  unoptimized={true}
                   src={product.logo_url}
                   alt={`${product.name} logo`}
                   width={32}

@@ -38,6 +38,7 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
         {/* Logo Section */}
         <div className="p-6 flex justify-center items-center bg-gray-50 dark:bg-green-900/10">
           <Image
+            unoptimized={true}
             width={128}
             height={128}
             src={product.logo_url}
