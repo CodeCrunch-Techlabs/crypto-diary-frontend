@@ -12,10 +12,17 @@ const Navbar: React.FC = () => {
       {/* Right Side Buttons */}
       <div className="flex items-center space-x-4">
         {/* Join Community Button */}
-        <button className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors">
+        {/* <button className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors">
           Join Community
-        </button>
+        </button> */}
+{/* <button className="px-2 sm:px-3 md:px-4 py-1 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-green-400 border rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors">
+  Join Community
+</button> */}
 
+<button className="px-2 sm:px-3 md:px-4 py-1 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-green-400 border rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors">
+  <span className="block sm:hidden">Join</span>
+  <span className="hidden sm:block">Join Community</span>
+</button>
         {/* Dark/Light Theme Toggle */}
         <ThemeToggle />
       </div>

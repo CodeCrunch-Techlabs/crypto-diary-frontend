@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-green-400">
             <Navbar />
-            <main>{children}</main>
+            <main className="flex-grow min-h-screen">{children}</main>
             <Footer />
       </body>
     </html>

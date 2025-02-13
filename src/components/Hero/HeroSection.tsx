@@ -5,10 +5,10 @@ import { useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
- 
+
     const router = useRouter();
     const searchParams = useSearchParams();
-    
+
     const initialSearch = searchParams.get("search") || ""; // Read search from URL
     const [input, setInput] = useState(initialSearch);
     const [isPending, startTransition] = useTransition();
@@ -20,19 +20,19 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
 
     const handleSearch = () => {
         if (input.trim() === "") return; // Prevent empty searches
-    
+
         // Get the current search value from the URL
         const currentSearchQuery = searchParams.get("search") || "";
-    
+
         // ✅ Prevent searching if input is the same as the existing query
         if (input.trim().toLowerCase() === currentSearchQuery.trim().toLowerCase()) {
             return;
         }
-    
+
         const params = new URLSearchParams(searchParams);
         params.set("search", input);
-        params.delete("page"); 
-    
+        params.delete("page");
+
         startTransition(() => {
             router.push(`/?${params.toString()}`);
         });
@@ -77,33 +77,35 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
                     />
 
                     <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                        <span className="px-2 py-1 text-xs text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md">
+                        {/* <span className="px-2 py-1 text-xs text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md">
+                            Product
+                        </span> */}
+                        <span className="px-1 sm:px-2 py-0.5 sm:py-1 text-xs sm:text-sm text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md whitespace-nowrap">
                             Product
                         </span>
-
                         {/* Search Button */}
                         <button
                             onClick={handleSearch}
                             className="p-1 text-gray-900 dark:text-green-400 hover:bg-gray-100 dark:hover:bg-green-400/10 rounded">
-                                {isPending ? (
-              // Spinner while loading
-            <div className="w-5 h-5 border-2 border-transparent border-t-green-400 border-r-green-400 rounded-full animate-spin"></div>
-            ) : (
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="m21 21-4.3-4.3" />
-                            </svg>
-                        )}
+                            {isPending ? (
+                                // Spinner while loading
+                                <div className="w-5 h-5 border-2 border-transparent border-t-green-400 border-r-green-400 rounded-full animate-spin"></div>
+                            ) : (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg>
+                            )}
                         </button>
                     </div>
                 </div>

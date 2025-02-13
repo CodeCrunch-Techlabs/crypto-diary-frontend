@@ -13,13 +13,13 @@ interface ProductsTableProps {
     totalPages: number;
     products: Product[];
   };
-  searchParams: Promise<{ search?: string; page?: number }>; 
+  searchParams: Promise<{ search?: string; page?: number }>;
 }
 
 const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searchParams }) => {
   const { products, currentPage, totalPages } = productsData;
-  const {search} = await searchParams;
-  const searchQuery = search || ""; 
+  const { search } = await searchParams;
+  const searchQuery = search || "";
 
   return (
     <section className="px-6 py-12">
@@ -40,9 +40,9 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
         </div>
       </div>
 
-      <div className="space-y-4 pb-8">
+      <div className="space-y-4 pb-8 overflow-x-auto sm:overflow-x-visible">
         {/* Table Header */}
-        <div className="grid grid-cols-[1.5fr_3.5fr_1.5fr] text-sm text-gray-500 dark:text-green-400 px-6 border-b border-gray-300 dark:border-green-400 pb-2">
+        <div className="grid min-w-[900px] sm:min-w-0 grid-cols-[2fr_4fr_2fr] text-sm text-gray-500 dark:text-green-400 px-6 border-b border-gray-300 dark:border-green-400 pb-2">
           <span>Name</span>
           <span>Description</span>
           <span>Category</span>
@@ -53,28 +53,31 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
           products.map((product) => {
             const slug = generateSlug(product.name); // Generate slug dynamically
             return (
-            <Link
-              key={product.id}
-              href={`/product/${slug}/${product.id}`} // ✅ SEO-friendly URL
-              className="grid grid-cols-[1.5fr_3.5fr_1.5fr] px-6 py-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5"
-            >
-              <div className="flex items-center space-x-4">
-                <Image
-                  unoptimized={true}
-                  src={product.logo_url}
-                  alt={`${product.name} logo`}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 object-contain"
-                />
-                <span className="font-medium">{product.name}</span>
-              </div>
-              <span className="w-[92%] truncate text-ellipsis overflow-hidden whitespace-nowrap">
-                {product.tagline}
-              </span>
+              <Link
+                key={product.id}
+                href={`/product/${slug}/${product.id}`} // ✅ SEO-friendly URL
+                // className="grid  min-w-[600px] sm:min-w-0 grid-cols-[1.5fr_3.5fr_1.5fr] px-6 py-3 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
 
-              <span className="truncate overflow-hidden whitespace-nowrap">{product.categories.map((category: string) => category).join(', ')}</span>
-            </Link>
+                className="grid min-w-[900px] sm:min-w-0 grid-cols-[2fr_4fr_2fr] px-6 py-3 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
+              >
+                <div className="flex items-center space-x-4">
+                  <Image
+                    unoptimized={true}
+                    src={product.logo_url}
+                    alt={`${product.name} logo`}
+                    width={32}
+                    height={32}
+                    className="w-8 h-8 object-contain flex-shrink-0"
+                  />
+                  <span className="font-medium text-xs sm:text-sm break-words sm:break-normal block">{product.name}</span>
+                </div>
+                <span className="w-[92%] text-xs sm:text-sm whitespace-nowrap sm:whitespace-normal">
+                {/* text-xs sm:text-sm whitespace-nowrap sm:whitespace-normal */}
+                  {product.tagline}
+                </span>
+
+                <span className="text-xs sm:text-sm break-words sm:break-normal leading-tight">{product.categories.map((category: string) => category).join(', ')}</span>
+              </Link>
             )
           })
         ) : (
