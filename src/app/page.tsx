@@ -2,7 +2,6 @@ export const dynamic = "force-dynamic"; // Ensures fresh data on each request
 import Hero from "../components/Hero/HeroSection"
 import ProductsTable from "@/components/Product/ProductTable";
 import { fetchProducts, fetchTotalProducts } from "@/utils/productApi"; 
-
  
 export default async function Home({searchParams}: {searchParams: Promise<{search: string, category: string, page: number}>}) { 
   const {page, search, category} = await (searchParams); 
