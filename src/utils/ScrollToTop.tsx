@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface ScrollToTopProps {
   trigger: unknown; // Value that triggers scroll effect (page or search change)
