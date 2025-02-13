@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Pagination from "./Pagination";
-import { generateSlug } from "@/utils/generateSlug";
+import {generateSlug} from "../../utils/generateSlug";
 import { Product } from "@/utils/interface";
-import ScrollToTop from "@/utils/ScrollToTop";
+import ScrollToTop from "../../utils/ScrollToTop";
 
 interface ProductsTableProps {
   productsData: {

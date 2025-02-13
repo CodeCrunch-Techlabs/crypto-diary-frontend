@@ -12,3 +12,7 @@ if (!("clipboard" in navigator)) {
     writable: true,
   });
 }
+
+if (!HTMLElement.prototype.scrollIntoView) {
+  HTMLElement.prototype.scrollIntoView = () => {};
+}
