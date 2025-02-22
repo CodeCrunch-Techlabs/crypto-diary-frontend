@@ -90,9 +90,11 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
       </div>
 
       {/* Product Images */}
-      <div className="mt-12">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-green-400">
-          Product Images
+
+      {product.media_urls.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-green-400">
+            Product Images
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
           {product.media_urls.map((image, index) => (
@@ -109,8 +111,9 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
               />
             </div>
           ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };
