@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "CryptoDiary | Crypto World Directory",
+  description: "Explore and track the activities and contributions of crypto enthusiasts, builders, and investors are documented.",
+  keywords: ["crypto", "diary", "crypto diary", "crypto enthusiast", "crypto builder", "crypto investor", "crypto products", "crypto directory", "blockchain projects", "crypto tracking", "web3 projects"],
+}
+
 export const dynamic = "force-dynamic"; // Ensures fresh data on each request
 import Hero from "../components/Hero/HeroSection"
 import ProductsTable from "@/components/Product/ProductTable";
