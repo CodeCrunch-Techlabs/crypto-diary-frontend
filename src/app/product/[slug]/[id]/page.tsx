@@ -39,14 +39,14 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
       title,
       description,
       url: `${BASE_URL}/product/${slug}/${id}`,
-      images: product?.imageUrl ? [product.imageUrl] : ["/default-og-image.jpg"],
+      images: product?.logo_url ? [product.logo_url] : ["/default-og-image.jpg"],
       // Add other Open Graph fields as needed
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: product?.imageUrl ? [product.imageUrl] : ["/default-og-image.jpg"],
+      images: product?.logo_url ? [product.logo_url] : ["/default-og-image.jpg"],
     }
     // You can add more fields like icons, alternates, etc.
   }
