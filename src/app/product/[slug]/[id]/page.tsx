@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import ProductDetailPage from "@/components/Product/ProductDetail"; 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cryptodiary.fun";
  
 // Function to fetch product details from API
 async function fetchProduct(id: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`, {
+  const res = await fetch(`${BASE_URL}/api/products/${id}`, {
     cache: "no-store",
   });
 
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
     openGraph: {
       title,
       description,
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/product/${slug}/${id}`,
+      url: `${BASE_URL}/product/${slug}/${id}`,
       images: product?.imageUrl ? [product.imageUrl] : ["/default-og-image.jpg"],
       // Add other Open Graph fields as needed
     },
