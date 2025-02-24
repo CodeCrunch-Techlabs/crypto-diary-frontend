@@ -6,7 +6,7 @@ import Footer from "../components/Footer/Footer"
 
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://cryptodiary.fun"),
   title: {
     default: "CryptoDiary | Crypto World Directory",
     template: "%s | CryptoDiary"
