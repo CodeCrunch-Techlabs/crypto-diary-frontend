@@ -2,11 +2,20 @@ import type { Metadata } from "next"
 import "./globals.css"
 import Navbar from "../components/Navbar/Navbar"
 import Footer from "../components/Footer/Footer"
+
+
+
 export const metadata: Metadata = {
   title: "CryptoDiary",
   description:
     "CryptoDiary - Where the activities and contributions of crypto enthusiasts, builders, and investors are documented.",
+    icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+    },
 };
+
 
 export default function RootLayout({
   children,

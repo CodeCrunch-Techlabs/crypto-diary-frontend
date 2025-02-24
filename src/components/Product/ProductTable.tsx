@@ -32,11 +32,11 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
           {searchQuery ? `Results for "${searchQuery}"` : "All Products"}
 
         </h2>
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
           <button className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md hover:bg-gray-100 dark:hover:bg-green-400/10 transition-colors">
             View All
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="space-y-4 pb-8 overflow-x-auto sm:overflow-x-visible">

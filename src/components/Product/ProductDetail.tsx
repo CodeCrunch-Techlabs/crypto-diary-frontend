@@ -81,7 +81,7 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
               href={product.product_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 py-3 text-sm font-semibold text-white bg-green-500 dark:bg-green-400 hover:bg-green-600 dark:hover:bg-green-500 rounded-md shadow transition-colors"
+              className="inline-block px-6 py-3 text-sm font-semibold text-black bg-green-500 dark:bg-green-400 hover:bg-green-600 dark:hover:bg-green-500 rounded-md shadow transition-colors color:black"
             >
               Visit Product Website
             </a>
