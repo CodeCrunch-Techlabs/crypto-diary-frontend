@@ -6,7 +6,11 @@ import Footer from "../components/Footer/Footer"
 
 
 export const metadata: Metadata = {
-  title: "CryptoDiary",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
+  title: {
+    default: "CryptoDiary | Crypto World Directory",
+    template: "%s | CryptoDiary"
+  },
   description:
     "CryptoDiary - Where the activities and contributions of crypto enthusiasts, builders, and investors are documented.",
     icons: {
@@ -14,6 +18,19 @@ export const metadata: Metadata = {
     shortcut: "/favicon.png",
     apple: "/favicon.png",
     },
+  openGraph: {
+    type: "website",
+    title: "CryptoDiary",
+    siteName: "CryptoDiary",
+    description:
+      "CryptoDiary - Where the activities and contributions of crypto enthusiasts, builders, and investors are documented.",
+    images: "/og-image.png",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@cryptodiaryfun",
+    creator: "@cryptodiaryfun",
+  }
 };
 
 
