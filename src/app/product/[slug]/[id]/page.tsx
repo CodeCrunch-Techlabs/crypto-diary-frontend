@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
   // Construct dynamic title & description
   const title = `CryptoDiary | ${product.name}`
   const description = product?.description || "Explore this crypto product on CryptoDiary."
-
+  const canonical = `${BASE_URL}/product/${slug}/${id}`
   // Provide openGraph, twitter, etc. to enhance social sharing
   return {
     title,
@@ -47,7 +47,10 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
       title,
       description,
       images: product?.logo_url ? [product.logo_url] : ["/default-og-image.jpg"],
-    }
+    },
+    alternates: {
+      canonical,
+    },
     // You can add more fields like icons, alternates, etc.
   }
 }
