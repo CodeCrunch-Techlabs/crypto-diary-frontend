@@ -20,6 +20,16 @@ export async function fetchProducts({ search, category, page }: { search?: strin
   return res.json();
 }
 
+export const fetchAllProductIds = cache(async () => {
+  const res = await fetch(`${BASE_URL}/api/products/ids`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch product IDs");
+
+  return res.json();
+});
+
 /**
  * Fetch total number of products (cached for performance)
  */
