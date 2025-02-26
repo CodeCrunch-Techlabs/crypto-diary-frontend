@@ -57,25 +57,50 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
 
 export default async function ProductDetail({ params }: { params: Promise<{ id: string; slug: string }> }) {
   const { id } = await params;
-  const { slug } = await params;
+  // const { slug } = await params;
   const product = await fetchProduct(id);
 
   if (!product) {
     return notFound();  
   }
 
+  console.log('product', product);
+  // const jsonLd = {
+  //   "@context": "https://schema.org",
+  //   "@type": "Product",
+  //   name: product.name,
+  //   description: product.description,
+  //   image: [product.logo_url], 
+  //   brand: {
+  //     "@type": "Brand",
+  //     name: "CryptoDiary",
+  //   },
+  //   category: product.categories.join(', '),
+  //   url: `${BASE_URL}/product/${slug}/${id}`,
+  // };
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "SoftwareApplication",
     name: product.name,
     description: product.description,
-    image: [product.logo_url], 
-    brand: {
-      "@type": "Brand",
+    image: [product.logo_url, ...product.media_urls],
+    applicationCategory: product.categories.join(', '), // e.g., "Crypto tools, Investing"
+    operatingSystem: "Blockchain", // Indicates it's a crypto/blockchain tool
+    url: product.product_url, // Link to actual product
+    author: {
+      "@type": "Organization",
       name: "CryptoDiary",
+      url: BASE_URL, // Your site URL
+      logo: `${BASE_URL}/favicon.png` // Your site logo
     },
-    category: product.categories.join(', '),
-    url: `${BASE_URL}/product/${slug}/${id}`,
+    // datePublished: product.created_at, // Use the created_at field
+    offers: {
+      "@type": "Offer",
+      price: "0", // Free to use
+      priceCurrency: "USD", // Default currency
+      availability: "https://schema.org/InStock"
+    }
   };
 
 

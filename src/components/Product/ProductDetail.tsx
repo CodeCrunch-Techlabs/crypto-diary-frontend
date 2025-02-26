@@ -12,19 +12,15 @@ interface Product {
   media_urls: string[];
 }
 
-interface JsonLd {  
+interface JsonLd {
   "@context": string;
   "@type": string;
   name: string;
   description: string;
   image: string[];
-  brand: {
-    "@type": string;
-    name: string;
-  };
-  category: string;
-  url: string;
 }
+
+ 
 interface ProductDetailProps {
   product: Product;
   jsonLd: JsonLd;
