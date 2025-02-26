@@ -19,11 +19,9 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
   const product = await fetchProduct(id)
 
   if (!product) {
-    // Return minimal or default metadata if product not found
     return {
       title: "Not Found - CryptoDiary",
       description: "No product found with the given ID."
-      // You could also skip returning anything, Next will fallback to RootLayout.
     }
   }
 
@@ -39,8 +37,14 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
       title,
       description,
       url: `${BASE_URL}/product/${slug}/${id}`,
-      images: product?.logo_url ? [product.logo_url] : ["/default-og-image.jpg"],
-      // Add other Open Graph fields as needed
+      images: [
+        {
+          url: product?.logo_url ? product.logo_url : "/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: product?.name || "CryptoDiary",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -51,50 +55,32 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
     alternates: {
       canonical,
     },
-    // You can add more fields like icons, alternates, etc.
   }
 }
 
 export default async function ProductDetail({ params }: { params: Promise<{ id: string; slug: string }> }) {
   const { id } = await params;
-  // const { slug } = await params;
   const product = await fetchProduct(id);
 
   if (!product) {
     return notFound();  
   }
-
-  console.log('product', product);
-  // const jsonLd = {
-  //   "@context": "https://schema.org",
-  //   "@type": "Product",
-  //   name: product.name,
-  //   description: product.description,
-  //   image: [product.logo_url], 
-  //   brand: {
-  //     "@type": "Brand",
-  //     name: "CryptoDiary",
-  //   },
-  //   category: product.categories.join(', '),
-  //   url: `${BASE_URL}/product/${slug}/${id}`,
-  // };
-
+ 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: product.name,
     description: product.description,
     image: [product.logo_url, ...product.media_urls],
-    applicationCategory: product.categories.join(', '), // e.g., "Crypto tools, Investing"
-    operatingSystem: "Blockchain", // Indicates it's a crypto/blockchain tool
-    url: product.product_url, // Link to actual product
+    applicationCategory: product.categories.join(', '),  
+    operatingSystem: "Blockchain", 
+    url: product.product_url, 
     author: {
       "@type": "Organization",
       name: "CryptoDiary",
-      url: BASE_URL, // Your site URL
-      logo: `${BASE_URL}/favicon.png` // Your site logo
+      url: BASE_URL, 
+      logo: `${BASE_URL}/favicon.png` 
     },
-    // datePublished: product.created_at, // Use the created_at field
     offers: {
       "@type": "Offer",
       price: "0", // Free to use
