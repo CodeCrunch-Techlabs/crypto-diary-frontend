@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "CryptoDiary",
     description:
       "CryptoDiary - Where the activities and contributions of crypto enthusiasts, builders, and investors are documented.",
-    images: "/og-image.png",
+    images: "/favicon.png",
   },
   twitter: {
     card: "summary_large_image",
