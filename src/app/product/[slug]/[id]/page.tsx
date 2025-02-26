@@ -57,12 +57,27 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
 
 export default async function ProductDetail({ params }: { params: Promise<{ id: string; slug: string }> }) {
   const { id } = await params;
-
+  const { slug } = await params;
   const product = await fetchProduct(id);
 
   if (!product) {
     return notFound();  
   }
 
-  return <ProductDetailPage product={product} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: [product.logo_url], 
+    brand: {
+      "@type": "Brand",
+      name: "CryptoDiary",
+    },
+    category: product.categories.join(', '),
+    url: `${BASE_URL}/product/${slug}/${id}`,
+  };
+
+
+  return <ProductDetailPage product={product} jsonLd={jsonLd} />;
 }
