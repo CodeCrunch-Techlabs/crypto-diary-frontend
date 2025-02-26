@@ -12,11 +12,25 @@ interface Product {
   media_urls: string[];
 }
 
+interface JsonLd {  
+  "@context": string;
+  "@type": string;
+  name: string;
+  description: string;
+  image: string[];
+  brand: {
+    "@type": string;
+    name: string;
+  };
+  category: string;
+  url: string;
+}
 interface ProductDetailProps {
   product: Product;
+  jsonLd: JsonLd;
 }
 
-const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
+const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) => {
 
   if (!product) {
     return (
@@ -28,6 +42,12 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product }) => {
 
   return (
     <section className="px-6 py-12 max-w-7xl mx-auto">
+
+      <script 
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}  
+      />
+
       {/* Back to Products Button */}
       <div className="mb-6">
         <BackButton />
