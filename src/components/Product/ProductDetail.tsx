@@ -59,6 +59,7 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) =>
             height={128}
             src={product.logo_url}
             alt={`${product.name} logo`}
+            title={`${product.name} logo`}
             className="w-32 h-32 object-contain border border-gray-300 dark:border-green-900/30 rounded-lg"
           />
         </div>
@@ -121,6 +122,7 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) =>
               <Image
                 src={image}
                 alt={`Product image ${index + 1}`}
+                title={`Product image ${index + 1}`}
                 width={300}
                 height={300}
                 className="w-full h-64 object-cover"
