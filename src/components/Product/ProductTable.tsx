@@ -55,6 +55,7 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
               <Link
                 key={product.id}
                 href={`/product/${slug}/${product.id}`} // ✅ SEO-friendly URL
+                title={`${product.name} logo`}
                 // className="grid  min-w-[600px] sm:min-w-0 grid-cols-[1.5fr_3.5fr_1.5fr] px-6 py-3 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
 
                 className="grid min-w-[900px] sm:min-w-0 grid-cols-[2fr_4fr_2fr] px-6 py-3 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
@@ -64,6 +65,7 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
                     unoptimized={true}
                     src={product.logo_url}
                     alt={`${product.name} logo`}
+                    title={`${product.name} logo`}
                     width={32}
                     height={32}
                     className="w-8 h-8 object-contain flex-shrink-0"
