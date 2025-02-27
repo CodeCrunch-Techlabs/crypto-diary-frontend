@@ -18,9 +18,9 @@ export default async function Home({searchParams}: {searchParams: Promise<{searc
   const totalProducts = await fetchTotalProducts();
 
   return (  
-    <section className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <Hero totalProducts={totalProducts} /> 
       <ProductsTable productsData={productsData} searchParams={searchParams} />
-    </section>
+    </div>
   )
 }
