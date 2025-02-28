@@ -83,7 +83,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
     },
     offers: {
       "@type": "Offer",
-      price: "0", // Free to use
+      price: "0", 
       priceCurrency: "USD", // Default currency
       availability: "https://schema.org/InStock"
     }
