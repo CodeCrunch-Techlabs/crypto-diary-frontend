@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
       url: `${BASE_URL}/product/${slug}/${id}`,
       images: [
         {
-          url: product?.logo_url ? product.logo_url : "/favicon.png",
+          url: product?.logo_url ? product.logo_url : "/favicon.ico",
           width: 1200,
           height: 630,
           alt: product?.name || "CryptoDiary",
@@ -79,7 +79,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
       "@type": "Organization",
       name: "CryptoDiary",
       url: BASE_URL, 
-      logo: `${BASE_URL}/favicon.png` 
+      logo: `${BASE_URL}/favicon.ico` 
     },
     offers: {
       "@type": "Offer",
