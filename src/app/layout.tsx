@@ -14,9 +14,9 @@ export const metadata: Metadata = {
   description:
     "CryptoDiary - Where the activities and contributions of crypto enthusiasts, builders, and investors are documented.",
     icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
     },
   openGraph: {
     type: "website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "CryptoDiary",
     description:
       "CryptoDiary - Where the activities and contributions of crypto enthusiasts, builders, and investors are documented.",
-    images: "/favicon.ico",
+    images: "/favicon.png",
   },
   twitter: {
     card: "summary_large_image",
