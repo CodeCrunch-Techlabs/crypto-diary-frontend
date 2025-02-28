@@ -12,19 +12,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const products = await fetchAllProductIds();
 
+    const staticPages = [
+        { url: `${baseUrl}/`, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },
+    ];
 
-    const productPages = products.products && products.products.map((product: Product) => {
+    const productPages = products?.products?.map((product: Product) => {
         const slug = generateSlug(product.name);
 
         const url = `${baseUrl}/product/${slug}/${product.id}`;
-
         const lastModified = new Date();
         const changeFrequency = "weekly" as const;
         const priority = 0.8;
 
         return { url, lastModified, changeFrequency, priority };
-    });
+    }) || [];
 
-
-    return productPages;
+    return [...staticPages, ...productPages];
 }
