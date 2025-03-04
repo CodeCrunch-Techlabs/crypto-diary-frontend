@@ -39,13 +39,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-
-/public/sitemaps/*
-!/public/sitemaps/.gitkeep
-sitemap.xml
-/sitemap.xml
-sitemap1.xml
-/sitemap1.xml
-/sitemaps
-sitemaps
+ 
