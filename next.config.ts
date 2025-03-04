@@ -18,15 +18,6 @@ const nextConfig: NextConfig = {
       "crypto-diary-product-images-bucket.s3.eu-north-1.amazonaws.com",
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: '/sitemap.xml',
-        destination: '/sitemaps/sitemap.xml',
-        permanent: true
-      }
-    ]
-  },
   async headers() {
     return [
       {
