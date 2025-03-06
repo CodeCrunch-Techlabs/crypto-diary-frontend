@@ -1,6 +1,6 @@
 import { cache } from "react";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cryptodiary.fun";
 
 /**
  * Fetch paginated product list
@@ -37,7 +37,6 @@ export const fetchTotalProducts = cache(async () => {
 
   try {
     const res = await fetch(`${BASE_URL}/api/products/stats`, {
-      cache: "force-cache", // ✅ Cached response
     });
 
     if (!res.ok) throw new Error("Failed to fetch total product count");
