@@ -24,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
     
     params.set("page", String(page)); // ✅ Ensure page is always a string
 
-    router.push(`/?${params.toString()}`);
+    router.push(`product/?${params.toString()}`);
   };
 
   return (
