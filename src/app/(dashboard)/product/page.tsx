@@ -12,7 +12,7 @@ export const metadata = {
   import ProductsTable from "@/components/Product/ProductTable";
   import { fetchProducts} from "@/utils/productApi"; 
    
-  export default async function Home({searchParams}: {searchParams: Promise<{search: string, category: string, page: number}>}) { 
+  export default async function ProductPage({searchParams}: {searchParams: Promise<{search: string, category: string, page: number}>}) { 
     const {page, search, category} = await (searchParams); 
     const productsData = await fetchProducts({ search, category, page });
     // const totalProducts = await fetchTotalProducts();
