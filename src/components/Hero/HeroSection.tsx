@@ -53,6 +53,9 @@ const filterButtons = [
     { label: "Products", emoji: "📦", path: "/product" },
     { label: "Web3 events", emoji: "🎉", path: "/event" },
     { label: "Investors", emoji: "💼", path: "/investor" },
+    { label: "Newsletters", emoji: "📰", path: "/newsletter" },
+    { label: "Crypto Clubs", emoji: "⭐", path: "/club" },
+    { label: "Incubators", emoji: "🚀", path: "/incubator" },
   ]
 
     const stats = [
