@@ -1,6 +1,6 @@
 // app/(dashboard)/event/page.tsx
 import Image from 'next/image';
-
+import Link from 'next/link';
 export default function EventPage() {
   // Eventually fetch your events data
   // const events = await fetchEvents();
@@ -83,6 +83,7 @@ export default function EventPage() {
 
         {/* Table Rows */}
         {events.map((event) => (
+          <Link href={`/event/${event.id}`} key={event.id}>
           <div
             key={event.id}
             className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
@@ -107,6 +108,7 @@ export default function EventPage() {
             <span className="text-xs sm:text-sm">{event.type}</span>
             <span className="text-xs sm:text-sm">{event.location}</span>
           </div>
+          </Link>
         ))}
       </div>
     </section>
