@@ -1,6 +1,9 @@
+
+// src/components/Product/ProductDetail.tsx
 import React from "react";
-import BackButton from "../Button/BackButton";
+// import BackButton from "../Button/BackButton";
 import Image from "next/image";
+import Breadcrumb from "../Breadcrumbs";
 
 interface Product {
   name: string;
@@ -20,7 +23,7 @@ interface JsonLd {
   image: string[];
 }
 
- 
+
 interface ProductDetailProps {
   product: Product;
   jsonLd: JsonLd;
@@ -37,18 +40,22 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) =>
   }
 
   return (
-    <section className="px-6 py-12 max-w-7xl mx-auto">
+    <section className="px-6 py-8 max-w-7xl mx-auto">
 
-      <script 
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}  
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       {/* Back to Products Button */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <BackButton />
-      </div>
-
+      </div> */}
+     {/* Breadcrumbs */}
+     <Breadcrumb title={product.name} links={[
+        { name: "Product", url: "/product" }, 
+        { name: product.name }
+      ]} />
       {/* Hero Section */}
       <div className="flex flex-col md:flex-row bg-white dark:bg-black border border-gray-200 shadow-lg rounded-lg overflow-hidden">
         {/* Logo Section */}
@@ -112,23 +119,23 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) =>
         <div className="mt-12">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-green-400">
             Product Images
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-          {product.media_urls.map((image, index) => (
-            <div
-              key={index}
-              className="border border-gray-200 dark:border-green-900/30 rounded-lg overflow-hidden shadow-lg"
-            >
-              <Image
-                src={image}
-                alt={`Product image ${index + 1}`}
-                title={`Product image ${index + 1}`}
-                width={300}
-                height={300}
-                className="w-full h-64 object-cover"
-              />
-            </div>
-          ))}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+            {product.media_urls.map((image, index) => (
+              <div
+                key={index}
+                className="border border-gray-200 dark:border-green-900/30 rounded-lg overflow-hidden shadow-lg"
+              >
+                <Image
+                  src={image}
+                  alt={`Product image ${index + 1}`}
+                  title={`Product image ${index + 1}`}
+                  width={300}
+                  height={300}
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
       )}

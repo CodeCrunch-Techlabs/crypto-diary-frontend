@@ -1,4 +1,5 @@
 // app/(dashboard)/event/page.tsx
+import Breadcrumb from '@/components/Breadcrumbs';
 import Image from 'next/image';
 import Link from 'next/link';
 export default function EventPage() {
@@ -62,6 +63,11 @@ export default function EventPage() {
   return (
     <section className="py-8">
 
+      <Breadcrumb title="All Events" links={[
+        { name: "Home", url: "/product" }, 
+          { name: "All Events" }
+      ]} />
+
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
 
       <h2 className="text-2xl font-mono text-gray-900 dark:text-green-400">
@@ -83,10 +89,10 @@ export default function EventPage() {
 
         {/* Table Rows */}
         {events.map((event) => (
-          <Link href={`/event/${event.id}`} key={event.id}>
+          <Link href={`/event/${event.title}/${event.id}`} key={event.id}>
           <div
             key={event.id}
-            className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
+            className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 mt-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
           >
             <div className="flex items-center space-x-4">
               <Image
