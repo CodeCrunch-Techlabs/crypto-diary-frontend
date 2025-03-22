@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useTransition } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { getSectionName } from "@/utils/getSectionName";
 
-const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
+const Hero: React.FC<{ totalProducts: number, totalEvents: number }> = ({ totalProducts, totalEvents }) => {
 
     const router = useRouter();
     const searchParams = useSearchParams();
-
+    const pathname = usePathname();
     const initialSearch = searchParams.get("search") || ""; // Read search from URL
     const [input, setInput] = useState(initialSearch);
     const [isPending, startTransition] = useTransition();
@@ -34,7 +35,7 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
         params.delete("page");
 
         startTransition(() => {
-            router.push(`product/?${params.toString()}`);
+            router.push(`${pathname}?${params.toString()}`);
         });
     };
 
@@ -60,7 +61,7 @@ const filterButtons = [
 
     const stats = [
         { label: "Total Products", value: totalProducts.toString() },
-        { label: "Upcoming Events", value: "435" },
+        { label: "Upcoming Events", value: totalEvents.toString() },
         { label: "Investors", value: "474" },
         { label: "Incubators", value: "123" },
     ];
@@ -91,7 +92,7 @@ const filterButtons = [
                             Product
                         </span> */}
                         <span className="px-1 sm:px-2 py-0.5 sm:py-1 text-xs sm:text-sm text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md whitespace-nowrap">
-                            Product
+                        {getSectionName(pathname)}
                         </span>
                         {/* Search Button */}
                         <button

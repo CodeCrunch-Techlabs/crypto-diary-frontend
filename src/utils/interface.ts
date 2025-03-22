@@ -9,16 +9,23 @@ export interface Product {
   }
 
 export interface EventData {
-  image: string;
   id: number;
+  event_images: {
+    logo: string;
+    banner: string;
+  };
   date: string;
   time: string;
   title: string;
   description: string;
-  organiser: string;
-  category: string;
-  type: string;
-  location: string;
+  organizer: string;
+  tags: string[];
+  paid_event: boolean;
+  location: {
+    city: string;
+    region: string;
+    country: string;
+  };
   link: string;
   icon: string;
 }

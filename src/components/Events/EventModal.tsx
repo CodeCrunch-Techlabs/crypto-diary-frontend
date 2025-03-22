@@ -9,6 +9,9 @@ interface EventModalProps {
     event: EventData;        // <-- use the new interface
     onClose: () => void;
   } 
+
+  const DEFAULT_IMAGE = "/images/default-event-logo.png";
+
 export default function EventModal({ event, onClose }: EventModalProps) {
     return (
         <div className="fixed inset-0 flex justify-end items-center bg-black bg-opacity-60 backdrop-blur-sm z-50 ">
@@ -27,7 +30,7 @@ export default function EventModal({ event, onClose }: EventModalProps) {
                 {/* Event Image */}
                 <div className="flex items-center justify-center mb-6 w-full">
                     <Image
-                        src={event.image}
+                        src={event?.event_images?.banner || DEFAULT_IMAGE}
                         alt={event.title}
                         width={250}
                         height={250}
@@ -39,7 +42,7 @@ export default function EventModal({ event, onClose }: EventModalProps) {
                 <div className="border border-green-500 rounded-md p-4 text-white bg-black shadow-md shadow-green-500/10">
                     {/* Event Title */}
                     <p className="text-lg font-semibold text-green-400">{event.title}</p>
-                    <p className="text-sm text-gray-400">Token2049 Dubai - {event.category} 🗣️</p>
+                    <p className="text-sm text-gray-400">Token2049 Dubai - {event.tags.map((tag: string) => tag).join(', ')} 🗣️</p>
 
                     {/* Event Date & Time */}
                     <div className="flex space-x-2 text-sm mt-3 text-gray-300">
@@ -53,9 +56,9 @@ export default function EventModal({ event, onClose }: EventModalProps) {
 
                     {/* Event Details */}
                     <div className="mt-6 space-y-3 text-sm text-gray-300">
-                        <p><span className="font-semibold text-green-400">🗣️ Organizer:</span> {event.organiser}</p>
-                        <p><span className="font-semibold text-green-400">🏷️ Category:</span> {event.category}</p>
-                        <p><span className="font-semibold text-green-400">📍 Location:</span> {event.location}</p>
+                        <p><span className="font-semibold text-green-400">🗣️ Organizer:</span> {event.organizer}</p>
+                        <p><span className="font-semibold text-green-400">🏷️ Tags:</span> {event.tags.map((tag: string) => tag).join(', ')}</p>
+                        <p><span className="font-semibold text-green-400">📍 Location:</span> {event.location?.city}, {event.location?.country}</p>
                     </div>
                 </div>
 

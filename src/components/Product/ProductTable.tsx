@@ -89,7 +89,7 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
       </div>
 
       {/* Pagination */}
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
+      <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/product" />
     </section>
   );
 };

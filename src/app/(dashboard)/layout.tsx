@@ -1,6 +1,7 @@
 // app/(dashboard)/layout.tsx
 import Hero from "@/components/Hero/HeroSection";
 import { fetchTotalProducts } from "@/utils/productApi"; 
+import { fetchTotalEvents } from "@/utils/eventApi";
 
 export const dynamic = "force-dynamic";
 
@@ -15,11 +16,12 @@ export default async function DashboardLayout({
 }) {
   // If you need the total products for the Hero, you can fetch it here:
   const totalProducts = await fetchTotalProducts();
+  const totalEvents = await fetchTotalEvents();
 
   return (
     <div className="max-w-7xl mx-auto">
       {/* Hero at the top */}
-      <Hero totalProducts={totalProducts} />
+      <Hero totalProducts={totalProducts} totalEvents={totalEvents} />
 
       {/* Render the actual page content below the hero */}
       {children}

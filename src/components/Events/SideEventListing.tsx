@@ -8,100 +8,149 @@ import { EventData } from '@/utils/interface';
 
 const events: EventData[] = [
   {
-    image: "/event.png",
+    event_images: {
+      banner: "/event.png",
+      logo: "/event.png",
+    },
     id: 1,
     date: "29 Apr",
     time: "ALL DAY",
     title: "DeFAI Con",
     description: "A leading conference on decentralized finance.",
-    organiser: "EAK Digital",
-    category: "Conference",
-    type: "Paid",
-    location: "Dubai, UAE",
+    organizer: "EAK Digital",
+    tags: ["Conference"],
+    paid_event: true,
+    location: {
+      city: "Bangalore",
+      region: "Asia",
+      country: "India 🇮🇳"
+    },
     link: "#",
     icon: "🗣️", // Conference Icon
   },
   {
-    image: "/event.png",
+    event_images: {
+      banner: "/event.png",
+      logo: "/event.png",
+    },
     id: 2,
     date: "1 - 2 May",
     time: "10 AM - 5 PM",
     title: "Sui Basecamp",
     description: "Exploring the future of decentralized finance.",
-    organiser: "Sui Network",
-    category: "Workshop",
-    type: "Free",
-    location: "Dubai, UAE",
+    organizer: "Sui Network",
+    tags: ["Workshop"],
+    paid_event: false,
+        location: {
+      city: "Dubai",
+      region: "Asia",
+      country: "UAE 🇦🇪"
+    },
     link: "#",
     icon: "🗣️", // Workshop Icon
   },
   {
-    image: '/event.png',
+    event_images: {
+      banner: "/event.png",
+      logo: "/event.png",
+    },
     id: 3,
     date: '3 May',
     time: '2 PM - 6 PM',
     title: 'Web3 Security Summit',
     description: 'Deep dive into blockchain security and best practices.',
-    organiser: 'CertiK',
-    category: 'Summit',
-    type: 'Paid',
-    location: 'Dubai, UAE',
+    organizer: 'CertiK',
+    tags: ['Summit'],
+    paid_event: true,
+    location: {
+      city: "Dubai",
+      region: "Asia",
+      country: "UAE 🇦🇪"
+    },
     link: '#',
     icon: '🗣️', // Security Summit Icon
   },
   {
-    image: '/event.png',
+    event_images: {
+      banner: "/event.png",
+      logo: "/event.png",
+    },
     id: 4,
     date: '4 May',
     time: '11 AM - 3 PM',
     title: 'NFT Art Gallery',
     description: 'Showcase of digital art and NFT collections.',
-    organiser: 'Digital Arts Dubai',
-    category: 'Exhibition',
-    type: 'Free',
-    location: 'Dubai, UAE',
+    organizer: 'Digital Arts Dubai',
+    tags: ['Exhibition'],
+    paid_event: false,
+    location: {
+      city: "Dubai",
+      region: "Asia",
+      country: "UAE 🇦🇪"
+    },
     link: '#',
     icon: '🗣️', // Exhibition Icon
   },
   {
-    image: '/event.png',
+    event_images: {
+      banner: "/event.png",
+      logo: "/event.png",
+    },
     id: 5,
     date: '5 May',
     time: '9 AM - 12 PM',
     title: 'DeFi Trading Masterclass',
     description: 'Learn advanced DeFi trading strategies.',
-    organiser: 'Trading Hub',
-    category: 'Workshop',
-    type: 'Paid',
-    location: 'Dubai, UAE',
+    organizer: 'Trading Hub',
+    tags: ['Workshop'],
+    paid_event: true,
+    location: {
+      city: "Dubai",
+      region: "Asia",
+      country: "UAE 🇦🇪"
+    },
     link: '#',
     icon: '🗣️', // Workshop Icon
   },
   {
-    image: '/event.png',
+    event_images: {
+      banner: "/event.png",
+      logo: "/event.png",
+    },
     id: 6,
     date: '6 May',
     time: '4 PM - 8 PM',
     title: 'Blockchain Networking Night',
     description: 'Connect with blockchain professionals and enthusiasts.',
-    organiser: 'Dubai Blockchain Society',
-    category: 'Networking',
-    type: 'Free',
-    location: 'Dubai, UAE',
+    organizer: 'Dubai Blockchain Society',
+    tags: ['Networking'],
+    paid_event: false,
+    location: {
+      city: "Dubai",
+      region: "Asia",
+      country: "UAE 🇦🇪"
+    },
     link: '#',
     icon: '🗣️', // Networking Icon
   },
   {
-    image: '/event.png',
+    event_images: {
+      banner: "/event.png",
+      logo: "/event.png",
+    },
     id: 7,
     date: '7 May',
     time: '1 PM - 5 PM',
     title: 'Smart Contract Hackathon',
     description: 'Build and deploy innovative smart contracts.',
-    organiser: 'ETH Dubai',
-    category: 'Hackathon',
-    type: 'Free',
-    location: 'Dubai, UAE',
+    organizer: 'ETH Dubai',
+    tags: ['Hackathon'],
+    paid_event: false,
+    location: {
+      city: "Dubai",
+      region: "Asia",
+      country: "UAE 🇦🇪"
+    },
     link: '#',
     icon: '👨‍💻', // Hackathon Icon
   }
@@ -150,7 +199,7 @@ export default function SideEventListing() {
                 <span className="text-xl">{event.icon}</span>
                 {/* Tooltip Text */}
                 <span className="absolute bottom-5 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-                  {event.category}
+                  {event.tags.map((tag: string) => tag).join(', ')}
                 </span>
               </div>
 
@@ -166,14 +215,14 @@ export default function SideEventListing() {
 
               {/* Paid Icon */}
               <span className="relative group text-xs sm:text-sm cursor-pointer text-center">
-                {event.type === 'Paid' ? (
+                {event.paid_event ? (
                   <span className="text-green-500">💰</span>
                 ) : (
                   <span className="text-gray-500">-</span>
                 )}
 
                 {/* Tooltip for "Paid Event" */}
-                {event.type === 'Paid' && (
+                {event.paid_event && (
                   <span className="absolute top-0 left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Paid Event
                   </span>
