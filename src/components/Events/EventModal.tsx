@@ -3,16 +3,22 @@ import Image from 'next/image';
 // import { FaTimes, FaLink } from 'react-icons/fa';
 import { FaTimes, FaLink } from 'react-icons/fa';
 
-import { EventData } from '@/utils/interface';
+import { sideEventModalData } from '@/utils/interface';
 
 interface EventModalProps {
-    event: EventData;        // <-- use the new interface
+    event: sideEventModalData;        // <-- use the new interface
     onClose: () => void;
   } 
 
   const DEFAULT_IMAGE = "/images/default-event-logo.png";
 
 export default function EventModal({ event, onClose }: EventModalProps) {
+
+    const dateObj = new Date(event?.startDate);
+    const dateStr = dateObj.toISOString().split('T')[0];
+    const timeStr = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    console.log('side modal data ---', event)
     return (
         <div className="fixed inset-0 flex justify-end items-center bg-black bg-opacity-60 backdrop-blur-sm z-50 ">
             {/* Modal Container */}
@@ -30,8 +36,8 @@ export default function EventModal({ event, onClose }: EventModalProps) {
                 {/* Event Image */}
                 <div className="flex items-center justify-center mb-6 w-full">
                     <Image
-                        src={event?.event_images?.banner || DEFAULT_IMAGE}
-                        alt={event.title}
+                        src={event?.cached_banner || DEFAULT_IMAGE}
+                        alt={event.name}
                         width={250}
                         height={250}
                         className="object-cover rounded-lg shadow-md w-full h-full"
@@ -41,13 +47,13 @@ export default function EventModal({ event, onClose }: EventModalProps) {
                 {/* Event Information Box */}
                 <div className="border border-green-500 rounded-md p-4 text-white bg-black shadow-md shadow-green-500/10">
                     {/* Event Title */}
-                    <p className="text-lg font-semibold text-green-400">{event.title}</p>
-                    <p className="text-sm text-gray-400">Token2049 Dubai - {event.tags.map((tag: string) => tag).join(', ')} 🗣️</p>
+                    <p className="text-lg font-semibold text-green-400">{event.name}</p>
+                    <p className="text-sm text-gray-400">Token2049 Dubai - {event?.topics?.map((tag: string) => tag).join(', ')} 🗣️</p>
 
                     {/* Event Date & Time */}
                     <div className="flex space-x-2 text-sm mt-3 text-gray-300">
                         <span className="flex gap-x-1 items-center">
-                            📅 <span className="font-medium">{event.date} | {event.time}</span>
+                            📅 <span className="font-medium">{dateStr} | {timeStr}</span>
                         </span>
                     </div>
 
@@ -56,9 +62,9 @@ export default function EventModal({ event, onClose }: EventModalProps) {
 
                     {/* Event Details */}
                     <div className="mt-6 space-y-3 text-sm text-gray-300">
-                        <p><span className="font-semibold text-green-400">🗣️ Organizer:</span> {event.organizer}</p>
-                        <p><span className="font-semibold text-green-400">🏷️ Tags:</span> {event.tags.map((tag: string) => tag).join(', ')}</p>
-                        <p><span className="font-semibold text-green-400">📍 Location:</span> {event.location?.city}, {event.location?.country}</p>
+                        <p><span className="font-semibold text-green-400">🗣️ Organizer:</span> {event?.organizer}</p>
+                        <p><span className="font-semibold text-green-400">🏷️ Tags:</span> {event?.topics?.map((tag: string) => tag).join(', ')}</p>
+                        <p><span className="font-semibold text-green-400">📍 Location:</span> {event?.city}, {event?.country}</p>
                     </div>
                 </div>
 
@@ -69,7 +75,7 @@ export default function EventModal({ event, onClose }: EventModalProps) {
 
                 {/* Event Link */}
                 <div className="mt-4">
-                    <a href={event.link} className="text-green-400 hover:text-green-300 transition text-sm flex items-center gap-2" target="_blank" rel="noopener noreferrer">
+                    <a href={event?.website} className="text-green-400 hover:text-green-300 transition text-sm flex items-center gap-2" target="_blank" rel="noopener noreferrer">
                         <FaLink /> Link to event
                     </a>
                 </div>

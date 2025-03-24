@@ -29,3 +29,31 @@ export interface EventData {
   link: string;
   icon: string;
 }
+
+export interface sideEventData {
+  id: number;
+  startDate: string;
+  time: string;
+  name: string;
+  description: string;
+  tags: string;
+  topics: string[];
+  paidEvent: boolean;
+  website: string;
+}
+
+export interface sideEventModalData {
+  id: number;
+  startDate: string;
+  time: string;
+  name: string;
+  description: string;
+  tags: string;
+  topics: string[];
+  paidEvent: boolean;
+  website: string;
+  cached_banner: string;
+  organizer: string;
+  city: string [];
+  country: string [];
+}

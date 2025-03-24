@@ -6,6 +6,7 @@ import Breadcrumb from "../Breadcrumbs";
 import { EventData } from "@/utils/interface";
 import { truncateText } from "@/utils/truncateText";
 import ScrollToTop from "@/utils/ScrollToTop";
+import { generateSlug } from "@/utils/generateSlug";
 // interface EventTableProps {
 //     events: EventData[];
 // }
@@ -61,10 +62,12 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
 
                 {/* Table Rows */}
                 {events.length > 0 ? (
-                    events.map((event) => (
-                        <Link href={`/event/${event?.title}/${event?.id}`} key={event?.id}>
-                            <div
-                                key={event?.id}
+                    events.map((event) => {
+                        const slug = generateSlug(event?.title);
+                        return (
+                            <Link href={`/event/${slug}/${event?.id}`} key={event?.id}>
+                                <div
+                                    key={event?.id}
                                 className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 mt-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
                             >
                                 <div className="flex items-center space-x-4">
@@ -87,8 +90,9 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
                                 <span className="text-xs sm:text-sm">{event?.paid_event ? "Paid" : "Free"}</span>
                                 <span className="text-xs sm:text-sm">{event?.location?.city}, {event?.location?.country}</span>
                             </div>
-                        </Link>
-                    ))
+                            </Link>
+                        )
+                    })
                 ) : (
                     <div className="text-center text-gray-500 dark:text-green-400">
                         No events found
