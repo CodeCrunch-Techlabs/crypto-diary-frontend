@@ -21,7 +21,6 @@ const DEFAULT_IMAGE = "/images/default-event-logo.jpg";
 
 
 const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams }) => {
-    console.log('eventsData in event table ----', eventsData);
     const { events, currentPage, totalPages } = eventsData;
     const { search } = await searchParams;
     const searchQuery = search || "";
