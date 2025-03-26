@@ -1,13 +1,10 @@
 'use client';
-// src/components/Events/SideEventListing.tsx
 import { useState } from 'react';
-// import Image from 'next/image';
 import EventModal from './EventModal';
-// import Breadcrumb from '../Breadcrumbs';
 import { sideEventData, sideEventModalData } from '@/utils/interface';
 import getEventEmoji from '@/utils/getEventEmoji';
-
-
+import { formatDateTimeRange } from '@/utils/formatDateTimeRange';
+import { truncateText } from "@/utils/truncateText";
 
 export default function SideEventListing({ sideEvents, mainEvents }: { sideEvents: sideEventData[], mainEvents: sideEventData[] }) {
   const [selectedEvent, setSelectedEvent] = useState<sideEventData | null>(null);
@@ -21,24 +18,10 @@ export default function SideEventListing({ sideEvents, mainEvents }: { sideEvent
     setSelectedEvent(null); // Close the modal
   };
 
-  const isoString = "2025-03-07T11:00:00.000Z";
-
-// Create a Date object
-const dateObj = new Date(isoString);
-
-// Format the date (YYYY-MM-DD)
-const date = dateObj.toISOString().split('T')[0];
-
-// Format the time (HH:MM)
-const time = dateObj.toISOString().split('T')[1].substring(0, 5);
-
-console.log("Date:", date); // Output: "2025-03-07"
-console.log("Time:", time); // Output: "11:00"
-
   return (
     <>
 
-      <section className="py-8">
+      <section className="py-8 max-w-7xl mx-auto px-6 py-12">
         {sideEvents && sideEvents.length > 0 && (
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
             <h2 className="text-2xl font-mono text-gray-900 dark:text-green-400">Side Events</h2>
@@ -54,10 +37,12 @@ console.log("Time:", time); // Output: "11:00"
             {sideEvents ? (
               sideEvents.map((event) => {
 
-                const dateObj = new Date(event?.startDate);
-    const dateStr = dateObj.toISOString().split('T')[0];
-    const timeStr = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    
+                const { date, time} = formatDateTimeRange(
+                  event?.startDate,
+                  event?.endDate,
+                  true
+                );
+
                 return (
                   <div
                     key={event.id}
@@ -65,10 +50,10 @@ console.log("Time:", time); // Output: "11:00"
                     onClick={() => handleEventClick(event)} // Open modal on click
                   >
                     {/* Date */}
-                    <span className="text-xs sm:text-sm">{dateStr}</span>
+                    <span className="text-xs sm:text-sm">{date}</span>
 
                     {/* Time */}
-                    <span className="text-xs sm:text-sm">{timeStr || "10 vage"}</span>
+                    <span className="text-xs sm:text-sm">{time || "10 vage"}</span>
 
                     {/* Event Icon with Tooltip */}
                     <div className="relative group cursor-pointer text-center">
@@ -86,8 +71,8 @@ console.log("Time:", time); // Output: "11:00"
                     </div>
 
                     {/* Description */}
-                    <div className="text-xs sm:text-sm max-w-[12rem] truncate">
-                      {event?.description}
+                    <div className="text-xs sm:text-sm max-w-[12rem]">
+                    {truncateText(event?.description, 15)}
                     </div>
 
                     {/* Paid Icon */}
@@ -103,7 +88,7 @@ console.log("Time:", time); // Output: "11:00"
                         <span className="absolute top-0 left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           Paid Event
                         </span>
-                      ): (
+                      ) : (
                         <span className="absolute top-0 left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-gray-800 text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           Free Event
                         </span>
@@ -115,7 +100,7 @@ console.log("Time:", time); // Output: "11:00"
                       <a href={event?.website} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                         <span role="img" aria-label="Link Icon">🔗</span>
                       </a>
-                      <span role="img" aria-label="Calendar Icon">📅</span>
+                      {/* <span role="img" aria-label="Calendar Icon">📅</span> */}
                     </span>
                   </div>
                 )

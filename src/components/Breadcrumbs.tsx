@@ -5,8 +5,8 @@ import { FaChevronRight } from "react-icons/fa";
 export default function Breadcrumb({ title, links }: { title: string, links: { name: string, url?: string }[] }) {
     console.log(title);
   return (
-    <nav className="text-gray-600 dark:text-gray-400 text-sm mt-4">
-      <ol className="flex items-center space-x-2 mb-10">
+    <nav className="text-gray-600 dark:text-gray-400 text-sm mt-8 ml-[3.5rem]">
+      <ol className="flex items-center space-x-2 ml-10">
         {links.map((link, index) => (
           <li key={index} className="flex items-center space-x-2">
             {index > 0 && <FaChevronRight className="text-gray-400" size={12} />}

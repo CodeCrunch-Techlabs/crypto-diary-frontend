@@ -107,9 +107,9 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                 { name: "Event", url: "/event" },
                 { name: event?.title }
             ]} />
-            <div className="relative mx-auto w-full">
+            <div className="relative mx-auto max-w-7xl mx-auto px-6 py-12">
                 {/* Background Image Section */}
-                <div className="relative w-full h-[320px] lg:h-[350px] flex items-end">
+                <div className="relative max-w-7xl mx-auto h-[320px] lg:h-[350px] flex items-end">
                     {/* Background Image */}
                     <div
                         className="absolute inset-0 bg-cover bg-center rounded-lg"
@@ -131,7 +131,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                 </div>
 
                 {/* Event Info Section */}
-                <div className="mt-12 px-6 md:px-12 flex flex-col lg:flex-row justify-between items-start">
+                <div className="mt-12 flex flex-col lg:flex-row justify-between items-start">
                     {/* Left Side - Event Details */}
                     <div>
                         <h1 className="text-3xl md:text-4xl font-extrabold text-black dark:text-white">{event?.title}</h1>
@@ -159,10 +159,6 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                     <a href={event?.link} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaGlobe size={20} /></a>
                         {event?.social_links?.telegram ? <a href={event?.social_links?.telegram} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaTelegramPlane size={20} /></a> : null}
                         {event?.social_links?.twitter ? <a href={event?.social_links?.twitter} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaTwitter size={20} /></a> : null}
-                        {/* <a href="#" className="hover:text-gray-800 dark:hover:text-white flex items-center space-x-1">
-                            <FaCalendarPlus size={20} />
-                            <span className="text-sm">Add to Calendar</span>
-                        </a> */}
                     </div>
                 </div>
             </div>

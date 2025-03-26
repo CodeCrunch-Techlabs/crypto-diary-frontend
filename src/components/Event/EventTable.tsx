@@ -2,15 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Pagination from "../Product/Pagination";
 import Image from "next/image";
-import Breadcrumb from "../Breadcrumbs";
 import { EventData } from "@/utils/interface";
 import { truncateText } from "@/utils/truncateText";
 import ScrollToTop from "@/utils/ScrollToTop";
 import { generateSlug } from "@/utils/generateSlug";
-// interface EventTableProps {
-//     events: EventData[];
-// }
-
+ 
 interface EventsTableProps {
     eventsData: {
         success: boolean;
@@ -21,7 +17,7 @@ interface EventsTableProps {
     searchParams: Promise<{ search?: string; page?: number }>;
 }
 
-const DEFAULT_IMAGE = "/images/default-event-logo.png";  
+const DEFAULT_IMAGE = "/images/default-event-logo.jpg";  
 
 
 const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams }) => {
@@ -33,11 +29,6 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
         <section className="py-8">
 
             <ScrollToTop trigger={`${searchQuery}-${currentPage}`} />
-
-            <Breadcrumb title="All Events" links={[
-                { name: "Home", url: "/product" },
-                { name: "All Events" }
-            ]} />
 
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
 

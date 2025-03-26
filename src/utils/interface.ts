@@ -40,6 +40,8 @@ export interface sideEventData {
   topics: string[];
   paidEvent: boolean;
   website: string;
+  endDate: string;
+  weekday: string;
 }
 
 export interface sideEventModalData {
@@ -56,4 +58,5 @@ export interface sideEventModalData {
   organizer: string;
   city: string [];
   country: string [];
+  endDate: string;
 }

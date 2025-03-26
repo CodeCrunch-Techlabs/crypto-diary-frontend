@@ -1,29 +1,29 @@
-// src/components/Events/ EventModal.tsx
 import Image from 'next/image';
-// import { FaTimes, FaLink } from 'react-icons/fa';
 import { FaTimes, FaLink } from 'react-icons/fa';
 
 import { sideEventModalData } from '@/utils/interface';
+import { formatDateTimeRange } from '@/utils/formatDateTimeRange';
 
 interface EventModalProps {
-    event: sideEventModalData;        // <-- use the new interface
+    event: sideEventModalData;   
     onClose: () => void;
   } 
 
-  const DEFAULT_IMAGE = "/images/default-event-logo.png";
+  const DEFAULT_IMAGE = "/images/default-event-logo.jpg";
 
 export default function EventModal({ event, onClose }: EventModalProps) {
 
-    const dateObj = new Date(event?.startDate);
-    const dateStr = dateObj.toISOString().split('T')[0];
-    const timeStr = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+     
+    const { date, time} = formatDateTimeRange(
+        event?.startDate,
+        event?.endDate,
+        true
+      );
 
     console.log('side modal data ---', event)
     return (
         <div className="fixed inset-0 flex justify-end items-center bg-black bg-opacity-60 backdrop-blur-sm z-50 ">
-            {/* Modal Container */}
-            {/* <div className="h-screen max-h-[100vh] w-[30vw] bg-black wi border-l-2 border-green-400 shadow-lg shadow-green-500/20 flex flex-col p-6 rounded-tl-2xl rounded-bl-2xl overflow-y-auto "> */}
-            <div className="h-screen max-h-[100vh] w-[90%] sm:w-[75%] md:w-[60%] lg:w-[40%] xl:w-[30vw] bg-black border-l-2 border-green-400 shadow-lg shadow-green-500/20 flex flex-col p-6 rounded-tl-2xl rounded-bl-2xl overflow-y-auto">
+            <div className="h-screen max-h-[100vh] w-[90%] sm:w-[75%] md:w-[60%] lg:w-[32%] xl:w-[31vw] bg-black border-l-2 border-green-400 shadow-lg shadow-green-500/20 flex flex-col p-6 rounded-tl-2xl rounded-bl-2xl overflow-y-auto">
 
                 {/* Close Button */}
                 <button 
@@ -53,12 +53,10 @@ export default function EventModal({ event, onClose }: EventModalProps) {
                     {/* Event Date & Time */}
                     <div className="flex space-x-2 text-sm mt-3 text-gray-300">
                         <span className="flex gap-x-1 items-center">
-                            📅 <span className="font-medium">{dateStr} | {timeStr}</span>
+                            📅 <span className="font-medium">{date} | {time}</span>
                         </span>
                     </div>
 
-                    {/* Event Description */}
-                    <p className="text-gray-300 mt-4 text-sm">{event.description}</p>
 
                     {/* Event Details */}
                     <div className="mt-6 space-y-3 text-sm text-gray-300">
@@ -70,7 +68,7 @@ export default function EventModal({ event, onClose }: EventModalProps) {
 
                 {/* Additional Event Notes */}
                 <div className="border border-gray-600 rounded-md p-4 bg-gray-900 mt-4 shadow-inner shadow-green-500/5">
-                    <p className="text-sm text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus dolores fugit voluptatem eveniet voluptate enim praesentium.</p>
+                    <p className="text-sm text-gray-400">{event?.description}</p>
                 </div>
 
                 {/* Event Link */}
