@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
       card: "summary_large_image",
       title,
       description,
-      images: product?.logo_url ? [product.logo_url] : ["/default-og-image.jpg"],
+      images: product?.logo_url ? [product.logo_url] : ["/images/default-og-image.png"],
     },
     alternates: {
       canonical,

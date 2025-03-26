@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
             url: `${BASE_URL}/event/${slug}/${id}`,
             images: [
                 {
-                    url: event?.event_images?.banner || "/default-og-image.jpg",
+                    url: event?.event_images?.banner || "/images/default-og-image.png",
                     width: 1200,
                     height: 630,
                     alt: title || "CryptoDiary"
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
             card: "summary_large_image",
             title,
             description,
-            images: event?.event_images?.banner || ["/default-og-image.jpg"]
+            images: event?.event_images?.banner || ["/images/default-og-image.png"]
         },
         alternates: {
             canonical,
@@ -82,7 +82,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
     //     "@type": "SoftwareApplication",
     //     name: event.title,
     //     description: event.description,
-    //     image: [event.event_images?.banner || "/default-og-image.jpg"],
+    //     image: [event.event_images?.banner || "/default-og-image.png"],
     //     applicationCategory: event.tags.join(', '),
     //     operatingSystem: "Blockchain",
     //     url: event.link,
@@ -103,17 +103,19 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
 
     return (
         <>
+           
+            <div className="relative mx-auto max-w-7xl mx-auto px-6 ">
             <Breadcrumb title={event?.title} links={[
                 { name: "Event", url: "/event" },
                 { name: event?.title }
             ]} />
-            <div className="relative mx-auto max-w-7xl mx-auto px-6 py-12">
                 {/* Background Image Section */}
-                <div className="relative max-w-7xl mx-auto h-[320px] lg:h-[350px] flex items-end">
+                <div className="relative mx-auto h-[320px] lg:h-[350px] flex items-end mt-10">
+                
                     {/* Background Image */}
                     <div
                         className="absolute inset-0 bg-cover bg-center rounded-lg"
-                        style={{ backgroundImage: `url(${event?.event_images?.banner || "/default-og-image.jpg"})` }}
+                        style={{ backgroundImage: `url(${event?.event_images?.banner || "/images/default-og-image.png"})` }}
                     />
                     {/* Dark Overlay */}
                     <div className="absolute inset-0  bg-opacity-40 rounded-lg"></div>
@@ -121,7 +123,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                     {/* Small Icon Image */}
                     <div className="absolute bottom-[-32px] left-6 w-24 h-24 md:w-28 md:h-28 rounded-xl border-4 border-white bg-black p-1 shadow-lg">
                         <Image
-                            src={event?.event_images?.logo || "/default-og-image.jpg"}
+                            src={event?.event_images?.logo || "/images/default-og-image.png"}
                             alt="Event Icon"
                             width={100}
                             height={100}

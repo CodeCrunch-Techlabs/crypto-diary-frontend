@@ -40,24 +40,19 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) =>
   }
 
   return (
-    <section className="px-6 py-8 max-w-7xl mx-auto">
+    <section className="px-6 max-w-7xl mx-auto">
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Back to Products Button */}
-      {/* <div className="mb-6">
-        <BackButton />
-      </div> */}
-     {/* Breadcrumbs */}
      <Breadcrumb title={product.name} links={[
         { name: "Product", url: "/product" }, 
         { name: product.name }
       ]} />
       {/* Hero Section */}
-      <div className="flex flex-col md:flex-row bg-white dark:bg-black border border-gray-200 shadow-lg rounded-lg overflow-hidden">
+      <div className="flex flex-col md:flex-row bg-white dark:bg-black border border-gray-200 shadow-lg rounded-lg overflow-hidden mt-10">
         {/* Logo Section */}
         <div className="p-6 flex justify-center items-center bg-gray-50 dark:bg-green-900/10">
           <Image
