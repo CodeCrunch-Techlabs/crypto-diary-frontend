@@ -42,6 +42,8 @@ export interface sideEventData {
   website: string;
   endDate: string;
   weekday: string;
+  event: string;
+  link:string;
 }
 
 export interface sideEventModalData {
@@ -59,4 +61,8 @@ export interface sideEventModalData {
   city: string [];
   country: string [];
   endDate: string;
+  cached_description: string;
+  banner: string;
+  event: string;
+  link: string;
 }
