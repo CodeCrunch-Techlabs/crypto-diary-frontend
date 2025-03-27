@@ -3,7 +3,6 @@ import Link from "next/link";
 import Pagination from "../Product/Pagination";
 import Image from "next/image";
 import { EventData } from "@/utils/interface";
-// import { truncateText } from "@/utils/truncateText";
 import { truncateText } from "../../utils/truncateText";
 import ScrollToTop from "../../utils/ScrollToTop";
 import { generateSlug } from "../../utils/generateSlug";

@@ -23,7 +23,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, basePa
     if (search) params.append("search", search);
     if (category) params.append("category", category);
     
-    params.set("page", String(page)); // ✅ Ensure page is always a string
+    params.set("page", String(page)); 
 
     router.push(`${basePath}/?${params.toString()}`);
   };

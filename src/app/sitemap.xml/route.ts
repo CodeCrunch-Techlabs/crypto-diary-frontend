@@ -14,8 +14,7 @@ export async function GET() {
     });
 
     // 2) Add references to sub-sitemaps
-    // same as your old code, but dynamic now
-    const sitemaps = ['sitemap-static.xml', 'sitemap-products.xml'];
+    const sitemaps = ['sitemap-static.xml', 'sitemap-products.xml', 'sitemap-events.xml'];
 
     sitemaps.forEach((filename) => {
       const smElem = root.ele('sitemap');

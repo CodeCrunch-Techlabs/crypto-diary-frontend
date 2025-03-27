@@ -1,7 +1,5 @@
 
-// src/components/Product/ProductDetail.tsx
 import React from "react";
-// import BackButton from "../Button/BackButton";
 import Image from "next/image";
 import Breadcrumb from "../Breadcrumbs";
 
