@@ -1,8 +1,9 @@
 // src/components/Breadcrumbs.tsx
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa";
+import React from 'react';
 
-export default function Breadcrumb({ title, links }: { title: string, links: { name: string, url?: string }[] }) {
+export default function Breadcrumb({ links }: { links: { name: string, url?: string }[] }) {
   return (
     <nav className="text-gray-600 dark:text-gray-400 text-sm mt-8 ">
       <ol className="flex items-center space-x-2">

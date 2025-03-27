@@ -47,7 +47,7 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) =>
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-     <Breadcrumb title={product.name} links={[
+     <Breadcrumb links={[
         { name: "Product", url: "/product" }, 
         { name: product.name }
       ]} />

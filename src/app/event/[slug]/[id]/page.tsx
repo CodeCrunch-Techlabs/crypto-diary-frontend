@@ -2,8 +2,9 @@
 
 
 // src/app/(dashboard)/event/[id]/page.tsx
-import Breadcrumb from "@/components/Breadcrumbs";
-import SideEventListing from "@/components/Events/SideEventListing";
+import React from "react";
+import Breadcrumb from "../../../../components/Breadcrumbs"
+import SideEventListing from "../../../../components/Events/SideEventListing";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FaRegCalendarAlt, FaMapMarkerAlt, FaTelegramPlane, FaGlobe, FaTwitter } from "react-icons/fa";
@@ -71,8 +72,6 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
     const { id } = await params;
     const event = await fetchEvent(id);
 
-    console.log('event in event detail page ---', event);
-
     if (!event) {
         return notFound();
     }
@@ -105,7 +104,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
         <>
            
             <div className="relative mx-auto max-w-7xl mx-auto px-6 ">
-            <Breadcrumb title={event?.title} links={[
+            <Breadcrumb links={[
                 { name: "Event", url: "/event" },
                 { name: event?.title }
             ]} />

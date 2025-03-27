@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { FaTimes, FaLink } from 'react-icons/fa';
 import { sideEventModalData } from '@/utils/interface';
-import { formatDateTimeRange } from '@/utils/formatDateTimeRange';
+import { formatDateTimeRange } from '../../utils/formatDateTimeRange';
 import { useEffect, useState } from 'react';
-
+import React from 'react';
 interface EventModalProps {
   event: sideEventModalData;
   onClose: () => void;
@@ -36,6 +36,7 @@ export default function EventModal({ event, onClose }: EventModalProps) {
 
   return (
     <div
+    data-testid="event-modal-backdrop"
       className={`fixed inset-0 flex justify-end items-center z-50 transition-opacity duration-300 ${
         show ? 'bg-black bg-opacity-60 backdrop-blur-sm' : 'bg-transparent'
       }`}

@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import EventModal from './EventModal';
 import { sideEventData, sideEventModalData } from '@/utils/interface';
-import getEventEmoji from '@/utils/getEventEmoji';
-import { formatDateTimeRange } from '@/utils/formatDateTimeRange';
-import { truncateText } from "@/utils/truncateText";
+import getEventEmoji from '../../utils/getEventEmoji';
+import { formatDateTimeRange } from '../../utils/formatDateTimeRange';
+import { truncateText } from "../../utils/truncateText";
+import React from 'react';
 
 export default function SideEventListing({ sideEvents, mainEvents }: { sideEvents: sideEventData[], mainEvents: sideEventData[] }) {
   const [selectedEvent, setSelectedEvent] = useState<sideEventData | null>(null);
