@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useTransition } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { getSectionName } from "@/utils/getSectionName";
 
-const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
+const Hero: React.FC<{ totalProducts: number, totalEvents: number }> = ({ totalProducts, totalEvents }) => {
 
     const router = useRouter();
     const searchParams = useSearchParams();
-
+    const pathname = usePathname();
     const initialSearch = searchParams.get("search") || ""; // Read search from URL
     const [input, setInput] = useState(initialSearch);
     const [isPending, startTransition] = useTransition();
@@ -34,23 +35,33 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
         params.delete("page");
 
         startTransition(() => {
-            router.push(`/?${params.toString()}`);
+            router.push(`${pathname}?${params.toString()}`);
         });
     };
 
-    const filterButtons = [
-        { label: "All", emoji: "🟢" },
-        { label: "Products", emoji: "📦" },
-        { label: "Web3 events", emoji: "🎉" },
-        { label: "Investors", emoji: "💼" },
-        { label: "Newsletters", emoji: "📰" },
-        { label: "Crypto Clubs", emoji: "⭐" },
-        { label: "Incubators", emoji: "🚀" },
-    ];
+    // const filterButtons = [
+    //     { label: "All", emoji: "🟢" },
+    //     { label: "Products", emoji: "📦" },
+    //     { label: "Web3 events", emoji: "🎉" },
+    //     { label: "Investors", emoji: "💼" },
+    //     { label: "Newsletters", emoji: "📰" },
+    //     { label: "Crypto Clubs", emoji: "⭐" },
+    //     { label: "Incubators", emoji: "🚀" },
+    // ];
+
+
+const filterButtons = [
+    { label: "Products", emoji: "📦", path: "/product" },
+    { label: "Web3 events", emoji: "🎉", path: "/event" },
+    { label: "Investors", emoji: "💼", path: "/investor" },
+    { label: "Newsletters", emoji: "📰", path: "/newsletter" },
+    { label: "Crypto Clubs", emoji: "⭐", path: "/club" },
+    { label: "Incubators", emoji: "🚀", path: "/incubator" },
+  ]
 
     const stats = [
         { label: "Total Products", value: totalProducts.toString() },
-        { label: "Upcoming Events", value: "435" },
+        { label: "Upcoming Events", value: totalEvents.toString() },
         { label: "Investors", value: "474" },
         { label: "Incubators", value: "123" },
     ];
@@ -81,7 +92,7 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
                             Product
                         </span> */}
                         <span className="px-1 sm:px-2 py-0.5 sm:py-1 text-xs sm:text-sm text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md whitespace-nowrap">
-                            Product
+                        {getSectionName(pathname)}
                         </span>
                         {/* Search Button */}
                         <button
@@ -113,7 +124,7 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
 
             {/* Filter Buttons */}
             <div className="flex flex-wrap justify-center gap-3">
-                {filterButtons.map((button) => (
+                {/* {filterButtons.map((button) => (
                     <button
                         key={button.label}
                         className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border rounded-md transition-colors flex items-center gap-2"
@@ -121,7 +132,22 @@ const Hero: React.FC<{ totalProducts: number }> = ({ totalProducts }) => {
                         <span>{button.emoji}</span>
                         {button.label}
                     </button>
-                ))}
+                ))} */}
+
+{filterButtons.map((button) => (
+      <button
+        key={button.label}
+        onClick={() =>
+          startTransition(() => {
+            router.push(button.path);
+          })
+        }
+        className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border rounded-md transition-colors flex items-center gap-2"
+      >
+        <span>{button.emoji}</span>
+        {button.label}
+      </button>
+    ))}
             </div>
 
             {/* Stats Section */}

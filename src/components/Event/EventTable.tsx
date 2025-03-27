@@ -1,0 +1,98 @@
+import React from "react";
+import Link from "next/link";
+import Pagination from "../Product/Pagination";
+import Image from "next/image";
+import { EventData } from "@/utils/interface";
+// import { truncateText } from "@/utils/truncateText";
+import { truncateText } from "../../utils/truncateText";
+import ScrollToTop from "../../utils/ScrollToTop";
+import { generateSlug } from "../../utils/generateSlug";
+ 
+interface EventsTableProps {
+    eventsData: {
+        success: boolean;
+        currentPage: number;
+        totalPages: number;
+        events: EventData[];
+    };
+    searchParams: Promise<{ search?: string; page?: number }>;
+}
+
+const DEFAULT_IMAGE = "/images/default-event-logo.jpg";  
+
+
+const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams }) => {
+    const { events, currentPage, totalPages } = eventsData;
+    const { search } = await searchParams;
+    const searchQuery = search || "";
+    return (
+        <section className="py-8">
+
+            <ScrollToTop trigger={`${searchQuery}-${currentPage}`} />
+
+            <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
+
+                <h2 className="text-2xl font-mono text-gray-900 dark:text-green-400">
+
+                 {searchQuery ? `Results for "${searchQuery}"` : "All Events"}
+
+                </h2>
+
+            </div>
+            {/* ... render your events table or UI */}
+            <div className="space-y-4 pb-8 overflow-x-auto sm:overflow-x-visible">
+                {/* Table Header */}
+                <div className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] text-sm text-gray-500 dark:text-green-400 px-6 border-b border-gray-300 dark:border-green-400 pb-2">
+                    <span>Event</span>
+                    <span>Description</span>
+                    <span>Organiser</span>
+                    <span>Tags</span>
+                    <span>Paid</span>
+                    <span>Location</span>
+                </div>
+
+                {/* Table Rows */}
+                {events.length > 0 ? (
+                    events.map((event) => {
+                        const slug = generateSlug(event?.title);
+                        return (
+                            <Link href={`/event/${slug}/${event?.id}`} key={event?.id}>
+                                <div
+                                    key={event?.id}
+                                className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 mt-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
+                            >
+                                <div className="flex items-center space-x-4">
+                                    <Image
+                                        unoptimized={true}
+                                        src={event?.event_images?.logo || DEFAULT_IMAGE}
+                                        alt={`${event?.title} logo`}
+                                        title={`${event?.title} logo`}
+                                        width={32}
+                                        height={32}
+                                        className="w-8 h-8 object-contain flex-shrink-0"
+                                    />
+                                    <span className="font-medium text-xs sm:text-sm break-words sm:break-normal block">
+                                        {event?.title}
+                                    </span>
+                                </div>
+                                <span className="text-xs sm:text-sm">{truncateText(event?.description, 90)}</span>
+                                <span className="text-xs sm:text-sm">{event?.organizer}</span>
+                                <span className="text-xs sm:text-sm">{event?.tags.slice(0, 5).join(', ')}</span>
+                                <span className="text-xs sm:text-sm">{event?.paid_event ? "Paid" : "Free"}</span>
+                                <span className="text-xs sm:text-sm">{event?.location?.city}, {event?.location?.country}</span>
+                            </div>
+                            </Link>
+                        )
+                    })
+                ) : (
+                    <div className="text-center text-gray-500 dark:text-green-400">
+                        No events found
+                    </div>
+                )}
+            </div>
+            <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/event" />
+        </section>
+    );
+};
+
+export default EventTable;

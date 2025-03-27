@@ -7,9 +7,10 @@ import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-r
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
+  basePath?: string;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
+const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, basePath = "/product" }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const category = searchParams.get("category") || "";
@@ -24,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
     
     params.set("page", String(page)); // ✅ Ensure page is always a string
 
-    router.push(`/?${params.toString()}`);
+    router.push(`${basePath}/?${params.toString()}`);
   };
 
   return (
