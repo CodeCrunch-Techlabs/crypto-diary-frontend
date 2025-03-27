@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params : Promise<{ id: stri
   const title = `CryptoDiary | ${product.name}`
   const description = product?.description || "Explore this crypto product on CryptoDiary."
   const canonical = `${BASE_URL}/product/${slug}/${id}`
-  // Provide openGraph, twitter, etc. to enhance social sharing
+  
   return {
     title,
     description,

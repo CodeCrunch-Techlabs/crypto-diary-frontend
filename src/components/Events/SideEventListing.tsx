@@ -10,11 +10,11 @@ import React from 'react';
 export default function SideEventListing({ sideEvents, mainEvents }: { sideEvents: sideEventData[], mainEvents: sideEventData[] }) {
   const [selectedEvent, setSelectedEvent] = useState<sideEventData | null>(null);
   const handleEventClick = (event: sideEventData) => {
-    setSelectedEvent(event); // Set the clicked event for the modal
+    setSelectedEvent(event); 
   };
 
   const closeModal = () => {
-    setSelectedEvent(null); // Close the modal
+    setSelectedEvent(null); 
   };
 
   return (
@@ -110,7 +110,6 @@ export default function SideEventListing({ sideEvents, mainEvents }: { sideEvent
                       <span className="text-xl">{getEventEmoji(event?.tags)}</span>
                       {/* Tooltip Text */}
                       <span className="absolute bottom-5 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-                        {/* {event?.topics?.map((tag: string) => tag).join(', ')} */}
                         {event?.tags}
                       </span>
                     </div>
@@ -150,7 +149,6 @@ export default function SideEventListing({ sideEvents, mainEvents }: { sideEvent
                       <a href={event?.website} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                         <span role="img" aria-label="Link Icon">🔗</span>
                       </a>
-                      {/* <span role="img" aria-label="Calendar Icon">📅</span> */}
                     </span>
                   </div>
                 )

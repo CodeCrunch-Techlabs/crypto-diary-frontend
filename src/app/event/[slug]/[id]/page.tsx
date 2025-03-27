@@ -1,6 +1,3 @@
-
-
-
 // src/app/(dashboard)/event/[id]/page.tsx
 import React from "react";
 import Breadcrumb from "../../../../components/Breadcrumbs"
@@ -23,7 +20,6 @@ async function fetchEvent(id: string) {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string; slug: string }> }) {
-
     const { id } = await params;
     const { slug } = await params;
     const event = await fetchEvent(id);
@@ -76,48 +72,51 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
         return notFound();
     }
 
-    // const jsonLd = {
-    //     "@context": "https://schema.org",
-    //     "@type": "SoftwareApplication",
-    //     name: event.title,
-    //     description: event.description,
-    //     image: [event.event_images?.banner || "/default-og-image.png"],
-    //     applicationCategory: event.tags.join(', '),
-    //     operatingSystem: "Blockchain",
-    //     url: event.link,
-    //     author: {
-    //         "@type": "Organization",
-    //         name: "CryptoDiary",
-    //         url: BASE_URL,
-    //         logo: `${BASE_URL}/favicon.png`
-    //     },
-    //     offers: {
-    //         "@type": "Offer",
-    //         price: "0",
-    //         priceCurrency: "USD", // Default currency
-    //         availability: "https://schema.org/InStock"
-    //     }
-    // };
-
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: event.title,
+        description: event.description,
+        image: [event.event_images?.banner || "/default-og-image.png"],
+        applicationCategory: event.tags.join(', '),
+        operatingSystem: "Blockchain",
+        url: event.link,
+        author: {
+            "@type": "Organization",
+            name: "CryptoDiary",
+            url: BASE_URL,
+            logo: `${BASE_URL}/favicon.png`
+        },
+        offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD", // Default currency
+            availability: "https://schema.org/InStock"
+        }
+    };
 
     return (
         <>
-           
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />  
+            
             <div className="relative mx-auto max-w-7xl mx-auto px-6 ">
-            <Breadcrumb links={[
-                { name: "Event", url: "/event" },
-                { name: event?.title }
-            ]} />
-                {/* Background Image Section */}
-                <div className="relative mx-auto h-[320px] lg:h-[350px] flex items-end mt-10">
+                <Breadcrumb links={[
+                    { name: "Event", url: "/event" },
+                    { name: event?.title }
+                ]} />
                 
+                {/* Background Image Section */}
+                <section className="relative mx-auto h-[320px] lg:h-[350px] flex items-end mt-10">
                     {/* Background Image */}
                     <div
                         className="absolute inset-0 bg-cover bg-center rounded-lg"
                         style={{ backgroundImage: `url(${event?.event_images?.banner || "/images/default-og-image.png"})` }}
                     />
                     {/* Dark Overlay */}
-                    <div className="absolute inset-0  bg-opacity-40 rounded-lg"></div>
+                    <div className="absolute inset-0 bg-opacity-40 rounded-lg"></div>
 
                     {/* Small Icon Image */}
                     <div className="absolute bottom-[-32px] left-6 w-24 h-24 md:w-28 md:h-28 rounded-xl border-4 border-white bg-black p-1 shadow-lg">
@@ -129,10 +128,10 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                             className="w-full h-full object-cover rounded-lg"
                         />
                     </div>
-                </div>
+                </section>
 
                 {/* Event Info Section */}
-                <div className="mt-12 flex flex-col lg:flex-row justify-between items-start">
+                <section className="mt-12 flex flex-col lg:flex-row justify-between items-start">
                     {/* Left Side - Event Details */}
                     <div>
                         <h1 className="text-3xl md:text-4xl font-extrabold text-black dark:text-white">{event?.title}</h1>
@@ -157,19 +156,25 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
 
                     {/* Right Side - Social Media & Calendar */}
                     <div className="flex items-center space-x-6 mt-6 lg:mt-0 text-gray-600 dark:text-gray-400">
-                    <a href={event?.link} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaGlobe size={20} /></a>
-                        {event?.social_links?.telegram ? <a href={event?.social_links?.telegram} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaTelegramPlane size={20} /></a> : null}
-                        {event?.social_links?.twitter ? <a href={event?.social_links?.twitter} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaTwitter size={20} /></a> : null}
+                        <a href={event?.link} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaGlobe size={20} /></a>
+                        {event?.social_links?.telegram ? 
+                          <a href={event?.social_links?.telegram} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaTelegramPlane size={20} /></a> 
+                          : null}
+                        {event?.social_links?.twitter ? 
+                          <a href={event?.social_links?.twitter} target="_blank" className="hover:text-gray-800 dark:hover:text-white"><FaTwitter size={20} /></a> 
+                          : null}
                     </div>
-                </div>
+                </section>
             </div>
 
-            {/* Side Events Listing */}
-            <div className="border-t w-full border-green-400 mt-10"></div>
-            <SideEventListing 
-            sideEvents={event?.details?.detail_data?.sideEvents} 
-            mainEvents={event?.details?.detail_data?.mainEvents}
-            />
+            {/* Side Events Listing Section */}
+            <section>
+                <div className="border-t w-full border-green-400 mt-10"></div>
+                <SideEventListing
+                    sideEvents={event?.details?.detail_data?.sideEvents}
+                    mainEvents={event?.details?.detail_data?.mainEvents}
+                />
+            </section>
         </>
     );
 }

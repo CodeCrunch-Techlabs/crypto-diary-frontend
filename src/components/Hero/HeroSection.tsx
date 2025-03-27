@@ -39,25 +39,14 @@ const Hero: React.FC<{ totalProducts: number, totalEvents: number }> = ({ totalP
         });
     };
 
-    // const filterButtons = [
-    //     { label: "All", emoji: "🟢" },
-    //     { label: "Products", emoji: "📦" },
-    //     { label: "Web3 events", emoji: "🎉" },
-    //     { label: "Investors", emoji: "💼" },
-    //     { label: "Newsletters", emoji: "📰" },
-    //     { label: "Crypto Clubs", emoji: "⭐" },
-    //     { label: "Incubators", emoji: "🚀" },
-    // ];
-
-
-const filterButtons = [
-    { label: "Products", emoji: "📦", path: "/product" },
-    { label: "Web3 events", emoji: "🎉", path: "/event" },
-    { label: "Investors", emoji: "💼", path: "/investor" },
-    { label: "Newsletters", emoji: "📰", path: "/newsletter" },
-    { label: "Crypto Clubs", emoji: "⭐", path: "/club" },
-    { label: "Incubators", emoji: "🚀", path: "/incubator" },
-  ]
+    const filterButtons = [
+        { label: "Products", emoji: "📦", path: "/product" },
+        { label: "Web3 events", emoji: "🎉", path: "/event" },
+        { label: "Investors", emoji: "💼", path: "/investor" },
+        { label: "Newsletters", emoji: "📰", path: "/newsletter" },
+        { label: "Crypto Clubs", emoji: "⭐", path: "/club" },
+        { label: "Incubators", emoji: "🚀", path: "/incubator" },
+    ]
 
     const stats = [
         { label: "Total Products", value: totalProducts.toString() },
@@ -88,11 +77,8 @@ const filterButtons = [
                     />
 
                     <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                        {/* <span className="px-2 py-1 text-xs text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md">
-                            Product
-                        </span> */}
                         <span className="px-1 sm:px-2 py-0.5 sm:py-1 text-xs sm:text-sm text-gray-900 dark:text-green-400 border border-gray-300 dark:border-green-400/30 rounded-md whitespace-nowrap">
-                        {getSectionName(pathname)}
+                            {getSectionName(pathname)}
                         </span>
                         {/* Search Button */}
                         <button
@@ -124,30 +110,21 @@ const filterButtons = [
 
             {/* Filter Buttons */}
             <div className="flex flex-wrap justify-center gap-3">
-                {/* {filterButtons.map((button) => (
+
+                {filterButtons.map((button) => (
                     <button
                         key={button.label}
+                        onClick={() =>
+                            startTransition(() => {
+                                router.push(button.path);
+                            })
+                        }
                         className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border rounded-md transition-colors flex items-center gap-2"
                     >
                         <span>{button.emoji}</span>
                         {button.label}
                     </button>
-                ))} */}
-
-{filterButtons.map((button) => (
-      <button
-        key={button.label}
-        onClick={() =>
-          startTransition(() => {
-            router.push(button.path);
-          })
-        }
-        className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border rounded-md transition-colors flex items-center gap-2"
-      >
-        <span>{button.emoji}</span>
-        {button.label}
-      </button>
-    ))}
+                ))}
             </div>
 
             {/* Stats Section */}

@@ -1,5 +1,3 @@
-// import { cache } from "react";
-
 import { cache } from "react";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cryptodiary.fun";
@@ -41,3 +39,15 @@ export const fetchTotalEvents = cache(async () => {
   }
 });
 
+/**
+ * Fetch all event IDs (cached for performance)
+ */
+export const fetchAllEventIds = cache(async () => {
+  const res = await fetch(`${BASE_URL}/api/events/ids`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch event IDs");
+
+  return res.json();
+});
