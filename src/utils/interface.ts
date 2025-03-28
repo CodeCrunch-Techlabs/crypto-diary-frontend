@@ -28,6 +28,11 @@ export interface EventData {
   };
   link: string;
   icon: string;
+  event_schedule: {
+    start_date: Date;
+    end_date: Date;
+    timezone: string;
+  };
 }
 
 export interface sideEventData {
