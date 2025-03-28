@@ -78,13 +78,13 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
                                         <div className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 mt-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4">
                                             <div className="flex items-center space-x-4">
                                                 <Image
-                                                    unoptimized={true}
                                                     src={event?.event_images?.logo || DEFAULT_IMAGE}
                                                     alt={`${event?.title} logo`}
                                                     title={`${event?.title} logo`}
                                                     width={32}
                                                     height={32}
                                                     className="w-8 h-8 object-contain flex-shrink-0"
+                                                    loading="lazy"
                                                 />
                                                 <span className="font-medium text-xs sm:text-sm break-words sm:break-normal block">
                                                     {event?.title}

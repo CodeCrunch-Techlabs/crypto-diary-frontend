@@ -123,9 +123,10 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                         <Image
                             src={event?.event_images?.logo || "/images/default-og-image.png"}
                             alt="Event Icon"
-                            width={100}
-                            height={100}
+                            width={64}
+                            height={64}
                             className="w-full h-full object-cover rounded-lg"
+                            loading="lazy"
                         />
                     </div>
                 </section>

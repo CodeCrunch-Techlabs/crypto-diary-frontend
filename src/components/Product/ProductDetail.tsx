@@ -54,13 +54,13 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) =>
         {/* Logo Section */}
         <div className="p-6 flex justify-center items-center bg-gray-50 dark:bg-green-900/10">
           <Image
-            unoptimized={true}
-            width={128}
-            height={128}
+            width={42}
+            height={42}
             src={product.logo_url}
             alt={`${product.name} logo`}
             title={`${product.name} logo`}
             className="w-32 h-32 object-contain border border-gray-300 dark:border-green-900/30 rounded-lg"
+            loading="lazy"
           />
         </div>
 
@@ -123,9 +123,10 @@ const ProductDetailPage: React.FC<ProductDetailProps> = ({ product, jsonLd }) =>
                   src={image}
                   alt={`Product image ${index + 1}`}
                   title={`Product image ${index + 1}`}
-                  width={300}
-                  height={300}
+                  width={256}
+                  height={256}
                   className="w-full h-64 object-cover"
+                  loading="lazy"
                 />
               </div>
             ))}

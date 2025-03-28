@@ -55,13 +55,13 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
               >
                 <div className="flex items-center space-x-4">
                   <Image
-                    unoptimized={true}
                     src={product.logo_url}
                     alt={`${product.name} logo`}
                     title={`${product.name} logo`}
-                    width={32}
-                    height={32}
+                    width={16}
+                    height={16}
                     className="w-8 h-8 object-contain flex-shrink-0"
+                    loading="lazy"
                   />
                   <span className="font-medium text-xs sm:text-sm break-words sm:break-normal block">{product.name}</span>
                 </div>
