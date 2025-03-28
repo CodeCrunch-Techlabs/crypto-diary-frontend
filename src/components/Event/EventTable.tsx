@@ -6,7 +6,8 @@ import { EventData } from "@/utils/interface";
 import { truncateText } from "../../utils/truncateText";
 import ScrollToTop from "../../utils/ScrollToTop";
 import { generateSlug } from "../../utils/generateSlug";
- 
+import { format } from 'date-fns';
+
 interface EventsTableProps {
     eventsData: {
         success: boolean;
@@ -17,13 +18,29 @@ interface EventsTableProps {
     searchParams: Promise<{ search?: string; page?: number }>;
 }
 
-const DEFAULT_IMAGE = "/images/default-event-logo.jpg";  
+const DEFAULT_IMAGE = "/images/default-event-logo.jpg";
 
 
 const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams }) => {
     const { events, currentPage, totalPages } = eventsData;
+
     const { search } = await searchParams;
     const searchQuery = search || "";
+
+    const groupedEvents = events.reduce((acc, event) => {
+        const startDate = event?.event_schedule?.start_date;
+        if (!startDate) return acc;
+
+        const monthName = format(new Date(startDate), 'MMMM yyyy'); // e.g., "March 2025"
+        if (!acc[monthName]) acc[monthName] = [];
+        acc[monthName].push(event);
+        return acc;
+    }, {} as Record<string, typeof events>);
+
+    // Sort months chronologically
+    const sortedMonths = Object.keys(groupedEvents).sort(
+        (a, b) => new Date(groupedEvents[a][0].event_schedule.start_date).getTime() - new Date(groupedEvents[b][0].event_schedule.start_date).getTime()
+    );
     return (
         <section className="py-8">
 
@@ -33,7 +50,7 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
 
                 <h2 className="text-2xl font-mono text-gray-900 dark:text-green-400">
 
-                 {searchQuery ? `Results for "${searchQuery}"` : "All Events"}
+                    {searchQuery ? `Results for "${searchQuery}"` : "All Events"}
 
                 </h2>
 
@@ -49,45 +66,49 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
                     <span>Paid</span>
                     <span>Location</span>
                 </div>
-
-                {/* Table Rows */}
-                {events.length > 0 ? (
-                    events.map((event) => {
-                        const slug = generateSlug(event?.title);
-                        return (
-                            <Link href={`/event/${slug}/${event?.id}`} key={event?.id}>
-                                <div
-                                    key={event?.id}
-                                className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 mt-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4"
-                            >
-                                <div className="flex items-center space-x-4">
-                                    <Image
-                                        unoptimized={true}
-                                        src={event?.event_images?.logo || DEFAULT_IMAGE}
-                                        alt={`${event?.title} logo`}
-                                        title={`${event?.title} logo`}
-                                        width={32}
-                                        height={32}
-                                        className="w-8 h-8 object-contain flex-shrink-0"
-                                    />
-                                    <span className="font-medium text-xs sm:text-sm break-words sm:break-normal block">
-                                        {event?.title}
-                                    </span>
-                                </div>
-                                <span className="text-xs sm:text-sm">{truncateText(event?.description, 90)}</span>
-                                <span className="text-xs sm:text-sm">{event?.organizer}</span>
-                                <span className="text-xs sm:text-sm">{event?.tags.slice(0, 5).join(', ')}</span>
-                                <span className="text-xs sm:text-sm">{event?.paid_event ? "Paid" : "Free"}</span>
-                                <span className="text-xs sm:text-sm">{event?.location?.city}, {event?.location?.country}</span>
-                            </div>
-                            </Link>
-                        )
-                    })
+ 
+                {sortedMonths.length > 0 ? (
+                    sortedMonths.map((month) => (
+                        <div key={month}>
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-green-400 mb-2 mt-8">{month}</h3>
+                            {groupedEvents[month].map((event) => {
+                                const slug = generateSlug(event?.title);
+                                return (
+                                    <Link href={`/event/${slug}/${event?.id}`} key={event?.id}>
+                                        <div className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 mt-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4">
+                                            <div className="flex items-center space-x-4">
+                                                <Image
+                                                    unoptimized={true}
+                                                    src={event?.event_images?.logo || DEFAULT_IMAGE}
+                                                    alt={`${event?.title} logo`}
+                                                    title={`${event?.title} logo`}
+                                                    width={32}
+                                                    height={32}
+                                                    className="w-8 h-8 object-contain flex-shrink-0"
+                                                />
+                                                <span className="font-medium text-xs sm:text-sm break-words sm:break-normal block">
+                                                    {event?.title}
+                                                </span>
+                                            </div>
+                                            <span className="text-xs sm:text-sm">{truncateText(event?.description, 90)}</span>
+                                            <span className="text-xs sm:text-sm">{event?.organizer}</span>
+                                            <span className="text-xs sm:text-sm">{event?.tags.slice(0, 5).join(', ')}</span>
+                                            <span className="text-xs sm:text-sm">{event?.paid_event ? "Paid" : "Free"}</span>
+                                            <span className="text-xs sm:text-sm">{event?.location?.city}, {event?.location?.country}</span>
+                                        </div>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    ))
                 ) : (
                     <div className="text-center text-gray-500 dark:text-green-400">
                         No events found
                     </div>
                 )}
+
+
+
             </div>
             <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/event" />
         </section>
