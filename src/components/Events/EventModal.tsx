@@ -60,9 +60,10 @@ export default function EventModal({ event, onClose }: EventModalProps) {
           <Image
             src={event?.cached_banner || event?.banner || DEFAULT_IMAGE}
             alt={event.name || event?.event}
-            width={250}
-            height={250}
+            width={256}
+            height={256}
             className="object-cover rounded-lg shadow-md w-full h-full"
+            loading="lazy"
           />
         </div>
 
