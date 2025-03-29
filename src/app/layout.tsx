@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import Navbar from "../components/Navbar/Navbar"
 import Footer from "../components/Footer/Footer"
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://cryptodiary.fun"),
@@ -38,11 +39,34 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    // <html lang="en" className="dark" suppressHydrationWarning>
+    //   <body className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-green-400">
+    //         <Navbar />
+    //         <main className="flex-grow min-h-screen">{children}</main>
+    //         <Footer />
+    //   </body>
+    // </html>
+
+
     <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-9MSCX4B13C"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-9MSCX4B13C');
+          `}
+        </Script>
+      </head>
       <body className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-green-400">
-            <Navbar />
-            <main className="flex-grow min-h-screen">{children}</main>
-            <Footer />
+        <Navbar />
+        <main className="flex-grow min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   )
