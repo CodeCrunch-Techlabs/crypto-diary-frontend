@@ -18,8 +18,8 @@ const MONTHS_SHORT = [
   }
   
   export function formatDateTimeRange(
-    startDate: string,
-    endDate: string,
+    startDate: string | Date,
+    endDate: string | Date,
     includeWeekday: boolean = false // Optional: whether to include weekday
   ): { date: string; time: string } {
     const start = new Date(startDate);

@@ -4,9 +4,9 @@ import Pagination from "../Product/Pagination";
 import Image from "next/image";
 import { EventData } from "@/utils/interface";
 import { truncateText } from "../../utils/truncateText";
-import ScrollToTop from "../../utils/ScrollToTop";
 import { generateSlug } from "../../utils/generateSlug";
 import { format } from 'date-fns';
+import { formatDateTimeRange } from "../../utils/formatDateTimeRange";
 
 interface EventsTableProps {
     eventsData: {
@@ -44,8 +44,6 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
     return (
         <section className="py-8">
 
-            <ScrollToTop trigger={`${searchQuery}-${currentPage}`} />
-
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
 
                 <h2 className="text-2xl font-mono text-gray-900 dark:text-green-400">
@@ -58,15 +56,16 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
             {/* ... render your events table or UI */}
             <div className="space-y-4 pb-8 overflow-x-auto sm:overflow-x-visible">
                 {/* Table Header */}
-                <div className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] text-sm text-gray-500 dark:text-green-400 px-6 border-b border-gray-300 dark:border-green-400 pb-2">
+                <div className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_1.5fr_3.5fr_2fr_2fr_1fr_2fr] text-sm text-gray-500 dark:text-green-400 px-6 border-b border-gray-300 dark:border-green-400 pb-2">
                     <span>Event</span>
+                    <span>Schedule</span>
                     <span>Description</span>
                     <span>Organiser</span>
                     <span>Tags</span>
                     <span>Paid</span>
                     <span>Location</span>
                 </div>
- 
+
                 {sortedMonths.length > 0 ? (
                     sortedMonths.map((month) => (
                         <div key={month}>
@@ -75,7 +74,7 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
                                 const slug = generateSlug(event?.title);
                                 return (
                                     <Link href={`/event/${slug}/${event?.id}`} key={event?.id}>
-                                        <div className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_3fr_2fr_2fr_1fr_2fr] px-6 py-3 mt-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4">
+                                        <div className="grid min-w-[1100px] sm:min-w-0 grid-cols-[2fr_1.5fr_3.5fr_2fr_2fr_1fr_2fr] px-6 py-3 mt-4 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 gap-4">
                                             <div className="flex items-center space-x-4">
                                                 <Image
                                                     src={event?.event_images?.logo || DEFAULT_IMAGE}
@@ -90,6 +89,13 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
                                                     {event?.title}
                                                 </span>
                                             </div>
+                                            <span className="text-xs sm:text-sm">
+                                                {formatDateTimeRange(
+                                                    event?.event_schedule?.start_date,
+                                                    event?.event_schedule?.end_date,
+                                                    false // or true if you want weekday like "Mon, 3 Apr"
+                                                ).date}
+                                            </span>
                                             <span className="text-xs sm:text-sm">{truncateText(event?.description, 90)}</span>
                                             <span className="text-xs sm:text-sm">{event?.organizer}</span>
                                             <span className="text-xs sm:text-sm">{event?.tags.slice(0, 5).join(', ')}</span>
