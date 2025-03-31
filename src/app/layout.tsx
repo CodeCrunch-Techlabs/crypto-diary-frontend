@@ -33,21 +33,12 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    // <html lang="en" className="dark" suppressHydrationWarning>
-    //   <body className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-green-400">
-    //         <Navbar />
-    //         <main className="flex-grow min-h-screen">{children}</main>
-    //         <Footer />
-    //   </body>
-    // </html>
-
-
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <Script
@@ -65,6 +56,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-green-400">
         <Navbar />
+
         <main className="flex-grow min-h-screen">{children}</main>
         <Footer />
       </body>

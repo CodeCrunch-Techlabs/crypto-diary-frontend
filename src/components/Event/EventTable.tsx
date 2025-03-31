@@ -4,7 +4,6 @@ import Pagination from "../Product/Pagination";
 import Image from "next/image";
 import { EventData } from "@/utils/interface";
 import { truncateText } from "../../utils/truncateText";
-import ScrollToTop from "../../utils/ScrollToTop";
 import { generateSlug } from "../../utils/generateSlug";
 import { format } from 'date-fns';
 import { formatDateTimeRange } from "../../utils/formatDateTimeRange";
@@ -44,8 +43,6 @@ const EventTable: React.FC<EventsTableProps> = async ({ eventsData, searchParams
     );
     return (
         <section className="py-8">
-
-            <ScrollToTop trigger={`${searchQuery}-${currentPage}`} />
 
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
 

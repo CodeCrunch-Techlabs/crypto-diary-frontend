@@ -3,7 +3,6 @@ import Link from "next/link";
 import Pagination from "./Pagination";
 import {generateSlug} from "../../utils/generateSlug";
 import { Product } from "@/utils/interface";
-import ScrollToTop from "../../utils/ScrollToTop";
 import Image from "next/image";
 interface ProductsTableProps {
   productsData: {
@@ -22,8 +21,6 @@ const ProductsTable: React.FC<ProductsTableProps> = async ({ productsData, searc
 
   return (
     <section className="px-6 py-12">
-
-      <ScrollToTop trigger={`${searchQuery}-${currentPage}`} />
 
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
