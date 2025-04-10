@@ -21,7 +21,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ title, placeholder, mode }) => {
     }, [initialSearch]);
 
     const handleSearch = () => {
-        if (!input.trim()) return;
+      const currentSearch = searchParams.get("search") || "";
+      if (input.trim() === currentSearch) return;
+
+      if (!input.trim()) return;
 
         const params = new URLSearchParams();
         params.set("search", input.trim());
