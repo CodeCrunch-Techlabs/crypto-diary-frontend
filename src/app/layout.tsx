@@ -3,6 +3,8 @@ import "./globals.css"
 import Navbar from "../components/Navbar/Navbar"
 import Footer from "../components/Footer/Footer"
 import Script from "next/script";
+import ProgressBarProvider from "./ProgressBar";
+// import NextNProgress from 'nextjs-progressbar';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://cryptodiary.fun"),
@@ -55,10 +57,12 @@ export default async function RootLayout({
         </Script>
       </head>
       <body className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-green-400">
+        <ProgressBarProvider>
         <Navbar />
 
         <main className="flex-grow min-h-screen">{children}</main>
         <Footer />
+        </ProgressBarProvider>
       </body>
     </html>
   )

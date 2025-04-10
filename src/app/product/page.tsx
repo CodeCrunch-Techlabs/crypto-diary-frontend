@@ -11,7 +11,6 @@ export const metadata = {
   import ProductsTable from "@/components/Product/ProductTable";
   import { fetchProducts} from "@/utils/productApi"; 
   import SearchBar from "@/components/Common/SearchBar";
-  import Breadcrumb from '@/components/Breadcrumbs';
    
   export default async function ProductPage({
     searchParams,
@@ -23,10 +22,6 @@ export const metadata = {
   
     return (
       <div className="max-w-7xl mx-auto px-4 pt-8 space-y-8">
-        <Breadcrumb links={[
-          { name: "Product", url: "/product" },
-          { name: "All Products" }
-        ]} />
         <SearchBar title="Explore products" placeholder="Search products..." mode="product" />
         <ProductsTable productsData={productsData} searchParams={searchParams} />
       </div>

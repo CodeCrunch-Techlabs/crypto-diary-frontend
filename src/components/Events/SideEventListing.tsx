@@ -35,7 +35,7 @@ export default function SideEventListing({ sideEvents, mainEvents }: { sideEvent
                   return (
                     <div
                       key={event.id}
-                      className="grid grid-cols-7 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-blue-400/5 px-6 py-3 gap-4 text-left"
+                      className="grid grid-cols-7 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-blue-400/5 px-6 py-3 gap-4 text-left cursor-pointer [&>*]:cursor-inherit"
                       onClick={() => handleEventClick(event)}
                     >
                       <span className="text-xs sm:text-sm">{date}</span>
@@ -96,7 +96,7 @@ export default function SideEventListing({ sideEvents, mainEvents }: { sideEvent
                 return (
                   <div
                     key={event.id}
-                    className="grid grid-cols-7 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 px-6 py-3 gap-4 text-left"
+                    className="grid grid-cols-7 items-center border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-green-400/5 px-6 py-3 gap-4 text-left cursor-pointer [&>*]:cursor-inherit"
                     onClick={() => handleEventClick(event)} // Open modal on click
                   >
                     {/* Date */}

@@ -11,7 +11,6 @@ export const dynamic = 'force-dynamic';
 import SearchBar from '@/components/Common/SearchBar';
 import EventTable from '@/components/Event/EventTable';
 import { fetchEvents } from '@/utils/eventApi';
-import Breadcrumb from '@/components/Breadcrumbs';
 
 export default async function EventPage({
   searchParams,
@@ -23,10 +22,6 @@ export default async function EventPage({
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-8 space-y-8">
-      <Breadcrumb links={[
-        { name: "Event", url: "/event" },
-        { name: "All Events" }
-      ]} />
       <SearchBar title="Explore upcoming events" placeholder="Search events..." mode="event" />
       <EventTable eventsData={eventsData} searchParams={searchParams} />
     </div>

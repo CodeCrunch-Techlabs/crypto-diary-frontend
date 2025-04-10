@@ -3,6 +3,7 @@
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import NProgress from "nprogress"; 
 
 interface PaginationProps {
   currentPage: number;
@@ -24,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, basePa
     if (category) params.append("category", category);
     
     params.set("page", String(page)); 
-
+    NProgress.start(); 
     router.push(`${basePath}/?${params.toString()}`);
   };
 

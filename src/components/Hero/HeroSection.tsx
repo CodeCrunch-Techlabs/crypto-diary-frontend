@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import SearchBar from "../Common/SearchBar"; 
+import NProgress from "nprogress";
+
 
 const Hero: React.FC<{ totalProducts: number; totalEvents: number }> = ({ totalProducts, totalEvents }) => {
   const router = useRouter();
@@ -22,6 +24,14 @@ const Hero: React.FC<{ totalProducts: number; totalEvents: number }> = ({ totalP
     { label: "Incubators", value: "123" },
   ];
 
+  const handleNavigation = (path: string) => {
+
+    console.log("Navigating to:", path);
+    NProgress.start(); 
+    router.push(path); 
+  };
+  
+
   return (
     <section className="flex flex-col items-center px-4 py-16 space-y-12">
 
@@ -33,7 +43,7 @@ const Hero: React.FC<{ totalProducts: number; totalEvents: number }> = ({ totalP
         {filterButtons.map((button) => (
           <button
             key={button.label}
-            onClick={() => router.push(button.path)}
+            onClick={() => handleNavigation(button.path)}
             className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border rounded-md transition-colors flex items-center gap-2"
           >
             <span>{button.emoji}</span>
