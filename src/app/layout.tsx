@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar/Navbar"
 import Footer from "../components/Footer/Footer"
 import Script from "next/script";
 import ProgressBarProvider from "./ProgressBar";
+import { Suspense } from "react" 
 // import NextNProgress from 'nextjs-progressbar';
 
 export const metadata: Metadata = {
@@ -57,12 +58,13 @@ export default async function RootLayout({
         </Script>
       </head>
       <body className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-green-400">
+      <Suspense fallback={null}>
         <ProgressBarProvider>
         <Navbar />
-
         <main className="flex-grow min-h-screen">{children}</main>
         <Footer />
         </ProgressBarProvider>
+        </Suspense>
       </body>
     </html>
   )
