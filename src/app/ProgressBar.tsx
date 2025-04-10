@@ -63,9 +63,11 @@ const ProgressBarProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     // Handle route changes
+    const searchParamsString = searchParams.toString();
+
     useEffect(() => {
         NProgress.done();
-    }, [pathname, searchParams.toString()]);
+    }, [pathname, searchParamsString]);
 
     if (!mounted) {
         return <>{children}</>;
