@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
-const nextConfig: NextConfig = {
+
+const config: NextConfig = {
   images: {
     domains: [
       "crypto-diary-product-images-bucket.s3.eu-north-1.amazonaws.com",
@@ -20,5 +24,7 @@ const nextConfig: NextConfig = {
     ];
   },
 };
+
+const nextConfig = withBundleAnalyzer(config);
 
 export default nextConfig;
