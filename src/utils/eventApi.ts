@@ -13,7 +13,7 @@ export async function fetchEvents({ search, category, page }: { search?: string;
 
   const res = await fetch(`${BASE_URL}/api/events?${queryParams.toString()}`, {
     next: {
-      revalidate: 60
+      revalidate: 300
     }
   });
 
@@ -47,7 +47,7 @@ export const fetchTotalEvents = cache(async () => {
 export const fetchAllEventIds = cache(async () => {
   const res = await fetch(`${BASE_URL}/api/events/ids`, {
     next: {
-      revalidate: 60
+      revalidate: 300
     }
   });
 
