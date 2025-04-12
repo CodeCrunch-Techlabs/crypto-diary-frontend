@@ -1,8 +1,4 @@
 import type { NextConfig } from "next";
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-
 
 const config: NextConfig = {
   images: {
@@ -25,6 +21,4 @@ const config: NextConfig = {
   },
 };
 
-const nextConfig = withBundleAnalyzer(config);
-
-export default nextConfig;
+export default config;
