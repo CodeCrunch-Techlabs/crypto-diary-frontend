@@ -12,6 +12,7 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, basePath = "/product" }) => {
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const category = searchParams.get("category") || "";
@@ -31,23 +32,23 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, basePa
 
   return (
     <div className="flex justify-center items-center space-x-4 mt-6">
-      <button onClick={() => changePage(1)} disabled={currentPage === 1} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
+      <button onClick={() => changePage(1)} disabled={pageNumber === 1} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
         <ChevronsLeft className="w-5 h-5" />
       </button>
 
-      <button onClick={() => changePage(pageNumber - 1)} disabled={currentPage === 1} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
+      <button onClick={() => changePage(pageNumber - 1)} disabled={pageNumber === 1} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
         <ChevronLeft className="w-5 h-5" />
       </button>
 
       <span className="text-sm text-gray-600 dark:text-green-300">
-        Page {currentPage} of {totalPages}
+        Page {pageNumber} of {totalPages}
       </span>
 
-      <button onClick={() => changePage(pageNumber + 1)} disabled={currentPage === totalPages} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
+      <button onClick={() => changePage(pageNumber + 1)} disabled={pageNumber === totalPages} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      <button onClick={() => changePage(totalPages)} disabled={currentPage === totalPages} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
+      <button onClick={() => changePage(totalPages)} disabled={pageNumber === totalPages} className="p-2 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-green-400/10">
         <ChevronsRight className="w-5 h-5" />
       </button>
     </div>
