@@ -1,12 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import SearchBar from "../Common/SearchBar"; 
+import SearchBar from "../Common/SearchBar";
 import NProgress from "nprogress";
-
+import Link from "next/link";
 
 const Hero: React.FC<{ totalProducts: number; totalEvents: number }> = ({ totalProducts, totalEvents }) => {
-  const router = useRouter();
 
   const filterButtons = [
     { label: "Products", emoji: "📦", path: "/product" },
@@ -24,14 +22,6 @@ const Hero: React.FC<{ totalProducts: number; totalEvents: number }> = ({ totalP
     { label: "Incubators", value: "123" },
   ];
 
-  const handleNavigation = (path: string) => {
-
-    console.log("Navigating to:", path);
-    NProgress.start(); 
-    router.push(path); 
-  };
-  
-
   return (
     <section className="flex flex-col items-center px-4 py-16 space-y-12">
 
@@ -41,14 +31,15 @@ const Hero: React.FC<{ totalProducts: number; totalEvents: number }> = ({ totalP
       {/* Filter Buttons */}
       <div className="flex flex-wrap justify-center gap-3">
         {filterButtons.map((button) => (
-          <button
+          <Link
             key={button.label}
-            onClick={() => handleNavigation(button.path)}
+            href={button.path}
+            onClick={() => NProgress.start()}
             className="px-4 py-2 text-sm text-gray-900 dark:text-green-400 border rounded-md transition-colors flex items-center gap-2"
           >
             <span>{button.emoji}</span>
             {button.label}
-          </button>
+          </Link>
         ))}
       </div>
 

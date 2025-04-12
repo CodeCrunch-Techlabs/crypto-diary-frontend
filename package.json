@@ -8,13 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "test:watch": "vitest watch",
-    "analyze": "ANALYZE=true next build"
+    "test:watch": "vitest watch"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@next/bundle-analyzer": "^15.3.0",
     "date-fns": "^4.1.0",
     "fs-extra": "^11.3.0",
     "lucide-react": "^0.473.0",

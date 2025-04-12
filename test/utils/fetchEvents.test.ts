@@ -28,7 +28,7 @@ describe("fetchEvents", () => {
     await fetchEvents({});
     expect(global.fetch).toHaveBeenCalledWith(
       "https://cryptodiary.fun/api/events?",
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 
@@ -41,7 +41,7 @@ describe("fetchEvents", () => {
     await fetchEvents({ search: "foo" });
     expect(global.fetch).toHaveBeenCalledWith(
       "https://cryptodiary.fun/api/events?search=foo",
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 
@@ -54,7 +54,7 @@ describe("fetchEvents", () => {
     await fetchEvents({ category: "bar" });
     expect(global.fetch).toHaveBeenCalledWith(
       "https://cryptodiary.fun/api/events?category=bar",
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 
@@ -67,7 +67,7 @@ describe("fetchEvents", () => {
     await fetchEvents({ page: 3 });
     expect(global.fetch).toHaveBeenCalledWith(
       "https://cryptodiary.fun/api/events?page=3",
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 
@@ -86,7 +86,7 @@ describe("fetchEvents", () => {
     // Additionally, the options should include cache: "no-store"
     expect(global.fetch).toHaveBeenCalledWith(
       expect.stringContaining("https://cryptodiary.fun/api/events?"),
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 

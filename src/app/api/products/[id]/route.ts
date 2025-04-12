@@ -11,7 +11,11 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Product ID is required" }, { status: 400 });
     }
 
-    const res = await fetch(`${BACKEND_URL}/products/${id}`, { cache: "no-store" });
+    const res = await fetch(`${BACKEND_URL}/products/${id}`, {
+      next: {
+        revalidate: 60
+      }
+    });
 
     if (!res.ok) {
       return NextResponse.json({ error: `Failed to fetch product: ${res.statusText}` }, { status: res.status });

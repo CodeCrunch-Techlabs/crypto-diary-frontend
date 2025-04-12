@@ -5,7 +5,9 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:500
 export async function GET() {
   try {
     const res = await fetch(`${BACKEND_URL}/products/stats`, {
-      cache: "no-store",
+      next: {
+        revalidate: 60
+      }
     });
 
     if (!res.ok) {

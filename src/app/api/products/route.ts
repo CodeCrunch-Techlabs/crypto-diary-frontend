@@ -8,7 +8,9 @@ export async function GET(req: NextRequest) {
     const queryString = searchParams.toString();
 
     const res = await fetch(`${BACKEND_URL}/products?${queryString}`, {
-      cache: "no-store",
+      next: {
+        revalidate: 60
+      }
     });
 
     if (!res.ok) {

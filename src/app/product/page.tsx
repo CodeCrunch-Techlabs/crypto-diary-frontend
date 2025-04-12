@@ -7,7 +7,7 @@ export const metadata = {
     },
   }
   
-  export const dynamic = "force-dynamic"; // Ensures fresh data on each request
+  // export const dynamic = "force-dynamic"; // Ensures fresh data on each request
   import ProductsTable from "@/components/Product/ProductTable";
   import { fetchProducts} from "@/utils/productApi"; 
   import SearchBar from "@/components/Common/SearchBar";

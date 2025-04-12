@@ -40,7 +40,7 @@ describe("fetchProducts", () => {
     // Check that fetch was called with the correct URL and cache option
     expect(global.fetch).toHaveBeenCalledWith(
       "/api/products?",
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 
@@ -55,7 +55,7 @@ describe("fetchProducts", () => {
 
     expect(global.fetch).toHaveBeenCalledWith(
       "/api/products?search=test-product",
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 
@@ -70,7 +70,7 @@ describe("fetchProducts", () => {
 
     expect(global.fetch).toHaveBeenCalledWith(
       "/api/products?page=3",
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 
@@ -84,7 +84,7 @@ describe("fetchProducts", () => {
 
     expect(global.fetch).toHaveBeenCalledWith(
       "/api/products?search=web3&category=Events&page=2",
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
   });
 
