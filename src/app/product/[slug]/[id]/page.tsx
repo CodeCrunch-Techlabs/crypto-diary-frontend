@@ -1,17 +1,18 @@
 import { notFound } from "next/navigation";
 import ProductDetailPage from "@/components/Product/ProductDetail"; 
+import { unstable_cache as cache } from "next/cache";
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cryptodiary.fun";
  
 // Function to fetch product details from API
-async function fetchProduct(id: string) {
+const fetchProduct = cache(async (id: string) => {
   const res = await fetch(`${BASE_URL}/api/products/${id}`, {
-    cache: "no-store",
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) return null;
 
   return res.json();
-}
+});
 
 export async function generateMetadata({ params }: { params : Promise<{ id: string; slug: string }> }) {
   const { id } = await params

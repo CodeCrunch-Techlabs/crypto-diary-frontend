@@ -12,7 +12,9 @@ export async function fetchProducts({ search, category, page }: { search?: strin
   if (page) queryParams.append("page", String(page));
 
   const res = await fetch(`${BASE_URL}/api/products?${queryParams.toString()}`, {
-    cache: "no-store",
+    next: {
+      revalidate: 60
+    }
   });
 
   if (!res.ok) throw new Error("Failed to fetch products");
@@ -22,7 +24,9 @@ export async function fetchProducts({ search, category, page }: { search?: strin
 
 export const fetchAllProductIds = cache(async () => {
   const res = await fetch(`${BASE_URL}/api/products/ids`, {
-    cache: "no-store",
+    next: {
+      revalidate: 60
+    }
   });
 
   if (!res.ok) throw new Error("Failed to fetch product IDs");

@@ -32,10 +32,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ title, placeholder, mode }) => {
         startTransition(() => {
             if (mode === "all") {
                 // Search both product and event  
+                router.prefetch(`/?${params.toString()}`);
                 router.push(`/?${params.toString()}`);
             } else if (mode === "product") {
+                router.prefetch(`/product?${params.toString()}`);
                 router.push(`/product?${params.toString()}`);
             } else if (mode === "event") {
+                router.prefetch(`/event?${params.toString()}`);
                 router.push(`/event?${params.toString()}`);
             }
         });

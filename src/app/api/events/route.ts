@@ -8,7 +8,10 @@ export async function GET(req: NextRequest) {
         const queryString = searchParams.toString();
 
   const res = await fetch(`${BACKEND_URL}/events?${queryString}`, {
-    cache: "no-store",
+    // cache: "no-store",
+    next: {
+      revalidate: 60
+    }
   });
 
   if (!res.ok) throw new Error("Failed to fetch events");

@@ -7,7 +7,7 @@ export const metadata = {
   },
 };
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 import SearchBar from '@/components/Common/SearchBar';
 import EventTable from '@/components/Event/EventTable';
 import { fetchEvents } from '@/utils/eventApi';

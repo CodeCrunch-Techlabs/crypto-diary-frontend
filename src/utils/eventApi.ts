@@ -12,7 +12,9 @@ export async function fetchEvents({ search, category, page }: { search?: string;
   if (page) queryParams.append("page", String(page));
 
   const res = await fetch(`${BASE_URL}/api/events?${queryParams.toString()}`, {
-    cache: "no-store",
+    next: {
+      revalidate: 60
+    }
   });
 
   if (!res.ok) throw new Error("Failed to fetch events");
@@ -44,7 +46,9 @@ export const fetchTotalEvents = cache(async () => {
  */
 export const fetchAllEventIds = cache(async () => {
   const res = await fetch(`${BASE_URL}/api/events/ids`, {
-    cache: "no-store",
+    next: {
+      revalidate: 60
+    }
   });
 
   if (!res.ok) throw new Error("Failed to fetch event IDs");

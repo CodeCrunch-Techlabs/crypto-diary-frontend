@@ -5,9 +5,11 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:500
 export async function GET() {
   try {
     const res = await fetch(`${BACKEND_URL}/events/all-event-ids`, {
-      cache: "no-store",
+      next: {
+        revalidate: 60
+      }
     });
-
+    
     if (!res.ok) {
       throw new Error(`Failed to fetch event IDs: ${res.statusText}`);
     }
